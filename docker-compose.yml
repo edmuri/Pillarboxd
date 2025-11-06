@@ -1,0 +1,48 @@
+# docker-compose.yml
+
+services:
+    # --- Rails Web Server Service ---
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: rails_web
+        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+        volumes:
+            - .:/app # Mount the current directory into the container
+            - bundle_cache:/usr/local/bundle # Cache gems between builds
+            # Don't ask why the next line is here (it ignores the fact that encryption is not set up with certificates and such between the server and the database)
+            - ./mysql-client-config/my.cnf:/etc/mysql/conf.d/disable-ssl.cnf
+        ports:
+            - "3000:3000"
+        depends_on:
+            db:
+                condition: service_healthy # Wait for the database to be ready
+        environment:
+            DATABASE_HOST: db
+            # Match these values to the 'db' service environment below
+            DATABASE_USERNAME: rails_user
+            DATABASE_PASSWORD: rails_password
+            DATABASE_NAME: pillarboxd_db
+
+    # --- MySQL Database Service ---
+    db:
+        image: mysql:9.5
+        container_name: mysql_db
+        environment:
+            MYSQL_ROOT_PASSWORD: root_password_secure
+            MYSQL_DATABASE: pillarboxd_db
+            MYSQL_USER: rails_user
+            MYSQL_PASSWORD: rails_password
+        # This volume mounts the database data to a local directory named 'mysql_data'
+        volumes:
+            - ./mysql_data:/var/lib/mysql # Store data locally in a persistent volume
+        ports:
+            - "3306:3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            timeout: 10s
+            retries: 5
+
+volumes:
+    bundle_cache: # Defined volume for gem caching

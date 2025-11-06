@@ -7,15 +7,13 @@
 
 ### Running the project
 
-Install ruby (however you do that on your os)
-
-Then set up the path variable so you can run binaries installed by gem (again depends on os)
+Install [docker compose](https://docs.docker.com/compose/install/)
 
 Then run
 
 ```bash
-gem install bundler
-cd .../Pillarboxd
-bundle install
-rails server
+docker-compose up -d --build # wait until it downloads everything and starts the containers
+docker exec -it rails_web bundle exec rails db:migrate --trace # to create the schema for the db
 ```
+
+The web server and db are already up and running. Database is at localhost:3306 and server is at localhost:3000

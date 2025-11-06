@@ -34,3 +34,5 @@
 /config/*.key
 
 notes.md
+
+/mysql_data
