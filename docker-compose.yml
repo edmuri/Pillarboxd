@@ -36,7 +36,7 @@ services:
             MYSQL_PASSWORD: rails_password
         # This volume mounts the database data to a local directory named 'mysql_data'
         volumes:
-            - ./mysql_data:/var/lib/mysql # Store data locally in a persistent volume
+            - mysql_data:/var/lib/mysql # Store data locally in a persistent volume
         ports:
             - "3306:3306"
         healthcheck:
@@ -46,3 +46,4 @@ services:
 
 volumes:
     bundle_cache: # Defined volume for gem caching
+    mysql_data: # Defined volume for MySQL data persistence
