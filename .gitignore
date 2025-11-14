@@ -36,3 +36,6 @@
 notes.md
 
 /mysql_data
+
+/access_token.txt
+/client_id.txt

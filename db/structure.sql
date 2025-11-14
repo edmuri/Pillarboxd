@@ -87,8 +87,9 @@ DROP TABLE IF EXISTS `Games`;
 CREATE TABLE `Games` (
   `game_id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `release_date` date DEFAULT NULL,
+  `release_date` datetime DEFAULT NULL,
   `summary` text,
+  `cover_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`game_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -247,6 +248,5 @@ CREATE TABLE `schema_migrations` (
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
 INSERT INTO `schema_migrations` (version) VALUES
-('20251106034516'),
-('20251106022211');
+('20251106034516');
 

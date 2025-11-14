@@ -24,6 +24,11 @@ services:
             DATABASE_USERNAME: rails_user
             DATABASE_PASSWORD: rails_password
             DATABASE_NAME: pillarboxd_db
+            TWITCH_CLIENT_ID: /run/secrets/client_id
+            TWITCH_ACCESS_TOKEN: /run/secrets/access_token
+        secrets:
+            - client_id
+            - access_token
 
     # --- MySQL Database Service ---
     db:
@@ -47,3 +52,9 @@ services:
 volumes:
     bundle_cache: # Defined volume for gem caching
     mysql_data: # Defined volume for MySQL data persistence
+
+secrets:
+    client_id:
+        file: client_id.txt
+    access_token:
+        file: access_token.txt

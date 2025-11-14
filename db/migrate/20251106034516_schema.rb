@@ -4,8 +4,9 @@ class Schema < ActiveRecord::Migration[8.1]
         CREATE TABLE IF NOT EXISTS Games(
             game_id INT NOT NULL AUTO_INCREMENT,
             title VARCHAR(255),
-            release_date DATE,
+            release_date DATETIME,
             summary TEXT,
+            cover_url VARCHAR(255),
             PRIMARY KEY (game_id)
         );
     SQL
