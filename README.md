@@ -13,7 +13,8 @@ Then run
 
 ```bash
 docker-compose up -d --build # wait until it downloads everything and starts the containers
-docker exec -it rails_web bundle exec rails db:migrate --trace # to create the schema for the db
+docker exec -it rails_web bundle exec rails db:migrate:reset --trace # to create the schema for the db
+docker exec -it rails_web bundle exec rails db:seed --trace # seed the database with data
 ```
 
 The web server and db are already up and running. Database is at localhost:3306 and server is at localhost:3000
