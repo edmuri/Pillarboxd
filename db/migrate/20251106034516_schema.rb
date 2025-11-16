@@ -1,183 +1,119 @@
 class Schema < ActiveRecord::Migration[8.1]
     def change
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Games(
-            game_id INT NOT NULL AUTO_INCREMENT,
-            title VARCHAR(255),
-            release_date DATETIME,
-            summary TEXT,
-            cover_url VARCHAR(255),
-            PRIMARY KEY (game_id)
-        );
-    SQL
+        create_table :games, primary_key: :game_id, id: :integer, if_not_exists: true do |t|
+        t.string :title
+        t.date :release_date
+        t.text :summary
+        t.string :cover_url
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Users(
-            user_id INT NOT NULL AUTO_INCREMENT,
-            username VARCHAR(50),
-            email VARCHAR(100),
-            password_hash VARCHAR(255),
-            join_date DATETIME,
-            bio VARCHAR(500),
-            UNIQUE (username),
-            UNIQUE (email),
-            PRIMARY KEY (user_id)
-        );
-    SQL
+        create_table :users, primary_key: :user_id, id: :integer, if_not_exists: true do |t|
+        t.string :username, limit: 50
+        t.string :email, limit: 100
+        t.string :password_hash
+        t.datetime :join_date
+        t.string :bio, limit: 500
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS GameUsers(
-            game_id INT,
-            user_id INT,
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            FOREIGN KEY (user_id) REFERENCES Users(user_id),
-            CONSTRAINT game_users PRIMARY KEY (game_id, user_id)
-        );
-    SQL
+        t.index :username, unique: true
+        t.index :email, unique: true
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Developers(
-            developer_id INT NOT NULL AUTO_INCREMENT,
-            name VARCHAR(100),
-            country VARCHAR(100),
-            website VARCHAR(100),
-            PRIMARY KEY (developer_id)
-        );
-    SQL
+        create_table :developers, primary_key: :developer_id, id: :integer, if_not_exists: true do |t|
+        t.string :name, limit: 100
+        t.string :country, limit: 100
+        t.string :website, limit: 100
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS GameDevelopers(
-            game_id INT,
-            developer_id INT,
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            FOREIGN KEY (developer_id) REFERENCES Developers(developer_id),
-            CONSTRAINT game_developers PRIMARY KEY (game_id, developer_id)
-        );
-    SQL
+        create_table :publishers, primary_key: :publisher_id, id: :integer, if_not_exists: true do |t|
+        t.string :name, limit: 100
+        t.string :country, limit: 100
+        t.string :website, limit: 100
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Publishers(
-            publisher_id INT NOT NULL AUTO_INCREMENT,
-            name VARCHAR(100),
-            country VARCHAR(100),
-            website VARCHAR(100),
-            PRIMARY KEY (publisher_id)
-        );
-    SQL
+        create_table :genres, primary_key: :genre_id, id: :integer, if_not_exists: true do |t|
+        t.string :name, limit: 100
+        t.string :description
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS GamePublishers(
-            game_id INT,
-            publisher_id INT,
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            FOREIGN KEY (publisher_id) REFERENCES Publishers(publisher_id),
-            CONSTRAINT game_publishers PRIMARY KEY (game_id, publisher_id)
-        );
-    SQL
+        create_table :platforms, primary_key: :platform_id, id: :integer, if_not_exists: true do |t|
+        t.string :name, limit: 100
+        t.string :manufacturer, limit: 100
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Genres(
-            genre_id INT NOT NULL AUTO_INCREMENT,
-            name VARCHAR(100),
-            description VARCHAR(255),
-            PRIMARY KEY (genre_id)
-        );
-    SQL
+        # === User-Specific Tables ===
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS GameGenres(
-            game_id INT,
-            genre_id INT,
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            FOREIGN KEY (genre_id) REFERENCES Genres(genre_id),
-            CONSTRAINT game_genres PRIMARY KEY (game_id, genre_id)
-        );
-    SQL
+        create_table :lists, primary_key: :list_id, id: :integer, if_not_exists: true do |t|
+        t.references :user, type: :integer, null: true, foreign_key: { to_table: :users, primary_key: :user_id }
+        t.string :title, limit: 150
+        t.text :description
+        t.boolean :is_public
+        t.boolean :is_backlog
+        t.datetime :created_at
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Lists(
-            list_id INT NOT NULL AUTO_INCREMENT,
-            user_id INT,
-            title VARCHAR(150),
-            description TEXT,
-            is_public BOOLEAN,
-            is_backlog BOOLEAN,
-            created_at DATETIME,
-            PRIMARY KEY (list_id),
-            FOREIGN KEY (user_id) REFERENCES Users(user_id)
-        );
-    SQL
+        create_table :logs, primary_key: :log_id, id: :integer, if_not_exists: true do |t|
+        t.references :user, type: :integer, null: false, foreign_key: { to_table: :users, primary_key: :user_id }
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.date :play_date
+        t.boolean :is_completed
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS ListEntries(
-            list_id INT,
-            game_id INT,
-            sort_order INT,
-            added_at DATETIME,
-            FOREIGN KEY (list_id) REFERENCES Lists(list_id),
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            CONSTRAINT game_lists PRIMARY KEY (game_id, list_id)
-        );
-    SQL
+        # For foreign key with a custom column name
+        t.integer :platform_played_id
+        t.foreign_key :platforms, column: :platform_played_id, primary_key: :platform_id
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS SocialGraph(
-            follower_id INT NOT NULL,
-            followed_id INT NOT NULL,
-            created_at DATETIME,
-            FOREIGN KEY (follower_id) REFERENCES Users(user_id),
-            FOREIGN KEY (followed_id) REFERENCES Users(user_id),
-            CONSTRAINT social PRIMARY KEY (follower_id, followed_id)
-        );
-    SQL
+        create_table :reviews, primary_key: :review_id, id: :integer, if_not_exists: true do |t|
+        t.references :user, type: :integer, null: false, foreign_key: { to_table: :users, primary_key: :user_id }
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.decimal :rating
+        t.text :review_text
+        t.date :review_date
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Platforms(
-            platform_id INT NOT NULL AUTO_INCREMENT,
-            name VARCHAR(100),
-            manufacturer VARCHAR(100),
-            PRIMARY KEY (platform_id)
-        );
-    SQL
+        t.index [ :user_id, :game_id ], unique: true, name: 'unique_review'
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS GamePlatforms(
-            game_id INT,
-            platform_id INT,
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            FOREIGN KEY (platform_id) REFERENCES Platforms(platform_id),
-            CONSTRAINT game_platforms PRIMARY KEY (game_id, platform_id)
-        );
-    SQL
+        create_table :follows, primary_key: [ :follower_id, :followed_id ], if_not_exists: true do |t|
+        t.integer :follower_id, null: false
+        t.integer :followed_id, null: false
+        t.datetime :created_at
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Logs(
-            log_id INT NOT NULL AUTO_INCREMENT,
-            user_id INT NOT NULL,
-            game_id INT NOT NULL,
-            play_date DATE,
-            is_completed BOOLEAN,
-            platform_played_id INT,
-            FOREIGN KEY (user_id) REFERENCES Users(user_id),
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            FOREIGN KEY (platform_played_id) REFERENCES Platforms(platform_id),
-            PRIMARY KEY (log_id)
-        );
-    SQL
+        # Add foreign keys for columns that don't follow convention
+        t.foreign_key :users, column: :follower_id, primary_key: :user_id
+        t.foreign_key :users, column: :followed_id, primary_key: :user_id
+        end
 
-    execute <<~SQL
-        CREATE TABLE IF NOT EXISTS Reviews(
-            review_id INT NOT NULL AUTO_INCREMENT,
-            user_id INT NOT NULL,
-            game_id INT NOT NULL,
-            rating DECIMAL,
-            review_text TEXT,
-            review_date DATE,
-            FOREIGN KEY (user_id) REFERENCES Users(user_id),
-            FOREIGN KEY (game_id) REFERENCES Games(game_id),
-            CONSTRAINT unique_review UNIQUE (user_id, game_id),
-            PRIMARY KEY (review_id)
-        );
-    SQL
+        # === Join Tables (Many-to-Many) ===
+
+        create_table :game_users, primary_key: [ :game_id, :user_id ], if_not_exists: true do |t|
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.references :user, type: :integer, null: false, foreign_key: { to_table: :users, primary_key: :user_id }
+        end
+
+        create_table :game_developers, primary_key: [ :game_id, :developer_id ], if_not_exists: true do |t|
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.references :developer, type: :integer, null: false, foreign_key: { to_table: :developers, primary_key: :developer_id }
+        end
+
+        create_table :game_publishers, primary_key: [ :game_id, :publisher_id ], if_not_exists: true do |t|
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.references :publisher, type: :integer, null: false, foreign_key: { to_table: :publishers, primary_key: :publisher_id }
+        end
+
+        create_table :game_genres, primary_key: [ :game_id, :genre_id ], if_not_exists: true do |t|
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.references :genre, type: :integer, null: false, foreign_key: { to_table: :genres, primary_key: :genre_id }
+        end
+
+        create_table :game_platforms, primary_key: [ :game_id, :platform_id ], if_not_exists: true do |t|
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.references :platform, type: :integer, null: false, foreign_key: { to_table: :platforms, primary_key: :platform_id }
+        end
+
+        create_table :list_entries, primary_key: [ :game_id, :list_id ], if_not_exists: true do |t|
+        t.references :list, type: :integer, null: false, foreign_key: { to_table: :lists, primary_key: :list_id }
+        t.references :game, type: :integer, null: false, foreign_key: { to_table: :games, primary_key: :game_id }
+        t.integer :sort_order
+        t.datetime :added_at
+        end
     end
 end
