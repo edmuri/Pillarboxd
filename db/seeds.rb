@@ -104,7 +104,8 @@ while batches != 0
         release = Time.at(0).to_datetime
         cover_url = "NO COVER"
         if g.dig("cover", "url")
-            cover_url = "https:#{g["cover"]["url"]}"
+            raw_url = "https:#{g['cover']['url']}"
+            cover_url = raw_url.gsub("t_thumb", "t_cover_big")
         end
 
         if g["first_release_date"].present?

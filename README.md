@@ -18,3 +18,8 @@ docker exec -it rails_web bundle exec rails db:seed --trace # seed the database 
 ```
 
 The web server and db are already up and running. Database is at localhost:3306 and server is at localhost:3000
+
+### Updating and/or Reseeding the Database
+```bash
+docker exec -it rails_web bundle exec rails db:reset
+```
