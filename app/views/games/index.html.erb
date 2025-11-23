@@ -1,0 +1,28 @@
+<div class="library-container">
+  <h1 class="page-title">Games Library</h1>
+  <p class="library-stats">
+    <%= @games.count %> games
+  </p>
+
+  <div class="game-grid">
+    <% @games.each do |game| %>
+      <!-- This makes the whole card clickable -->
+      <%= link_to game_path(game), class: "game-card" do %>
+        
+        <div class="poster-frame">
+          <% if game.cover_url.present? %>
+            <img src="<%= game.cover_url %>" alt="<%= game.title %>" loading="lazy">
+          <% else %>
+            <!-- A fallback grey box if no image exists -->
+            <div class="no-image">No Cover</div>
+          <% end %>
+        </div>
+
+        <div class="game-info">
+          <span class="title"><%= game.title %></span>
+        </div>
+        
+      <% end %>
+    <% end %>
+  </div>
+</div>

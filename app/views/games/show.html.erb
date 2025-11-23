@@ -1,0 +1,10 @@
+<h1><%= @game.title %></h1>
+
+<img src="<%= @game.cover_url %>" alt="Cover Image">
+
+<p><strong>Release Date:</strong> <%= @game.release_date %></p>
+
+<h3>Summary</h3>
+<p><%= @game.summary %></p>
+
+<%= link_to "Back to Games", games_path %>
