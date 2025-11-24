@@ -17,6 +17,7 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -32,7 +33,7 @@
           <%= link_to "PILLARBOXD", root_path, class: "nav-logo" %>
           
           <ul class="nav-menu">
-            <li><a href="#" class="nav-link">Games</a></li>
+            <li><%= link_to "Games", games_path, class: "nav-link" %></li>
             <li><a href="#" class="nav-link">Lists</a></li>
             <li><a href="#" class="nav-link">Logs</a></li>
           </ul>
