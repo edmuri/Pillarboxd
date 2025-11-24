@@ -24,7 +24,31 @@
   </head>
 
   <body>
-    <%= yield %>
+  
+    <nav class="main-navbar">
+      <div class="nav-container">
+        
+        <div class="nav-left">
+          <%= link_to "PILLARBOXD", root_path, class: "nav-logo" %>
+          
+          <ul class="nav-menu">
+            <li><a href="#" class="nav-link">Games</a></li>
+            <li><a href="#" class="nav-link">Lists</a></li>
+            <li><a href="#" class="nav-link">Logs</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-right">
+          <a href="#" class="nav-link">Sign In</a>
+          <a href="#" class="nav-btn-signup">Create Account</a>
+        </div>
+
+      </div>
+    </nav>
+    <main class="content-wrapper">
+      <%= yield %>
+    </main>
+
   </body>
 </html>
 

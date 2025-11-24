@@ -1,20 +1,48 @@
 <div class="library-container">
-  <h1 class="page-title">Games Library</h1>
-  <p class="library-stats">
-    <%= @games.count %> games
-  </p>
+
+  <div class="header-section">
+  
+    <div class="header-left">
+      <h1 class="page-title">Games Library</h1>
+      <p class="library-stats">
+        <% if params[:query].present? %>
+          Found <strong><%= @games.count %></strong> results for "<em><%= params[:query] %></em>"
+        <% else %>
+          There are <strong><%= number_with_delimiter(@games.count) %></strong> games.
+        <% end %>
+      </p>
+    </div>
+
+    <div class="header-right">
+      <%= form_with url: games_path, method: :get, local: true, class: "search-form" do |form| %>
+        
+        <%= form.text_field :query, 
+              value: params[:query], 
+              placeholder: "Find a game...", 
+              class: "search-input" 
+        %>
+
+        <% if params[:query].present? %>
+          <%= link_to "✕", games_path, class: "clear-search-btn", title: "Clear Filter" %>
+        <% end %>
+
+        <%= form.submit "Search", class: "search-button" %>
+      <% end %>
+    </div>
+    
+  </div>
 
   <div class="game-grid">
     <% @games.each do |game| %>
-      <!-- This makes the whole card clickable -->
       <%= link_to game_path(game), class: "game-card" do %>
         
         <div class="poster-frame">
-          <% if game.cover_url.present? %>
+          <% if game.cover_url.present? && game.cover_url != "NO COVER" %>
             <img src="<%= game.cover_url %>" alt="<%= game.title %>" loading="lazy">
           <% else %>
-            <!-- A fallback grey box if no image exists -->
-            <div class="no-image">No Cover</div>
+            <div class="no-image">
+              Cover Art<br>Not Available
+            </div>
           <% end %>
         </div>
 
@@ -25,4 +53,12 @@
       <% end %>
     <% end %>
   </div>
+  
+  <% if @games.empty? %>
+    <div style="text-align: center; margin-top: 50px; color: #678;">
+      <h2>No games found matching "<%= params[:query] %>"</h2>
+      <%= link_to "Clear Search", games_path, style: "color: #00e054;" %>
+    </div>
+  <% end %>
+
 </div>
