@@ -84,3 +84,76 @@
 .auth-links a:hover {
   color: #fff;
 }
+
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-label {
+  margin-bottom: 0 !important; /* Override the standard label margin */
+  font-size: 0.85rem;
+  color: #9ab;
+  text-transform: none !important; /* Keep it normal case */
+  cursor: pointer;
+}
+
+/* Custom checkbox color (Optional - browser default is usually fine) */
+input[type="checkbox"] {
+  accent-color: #00e054;
+  cursor: pointer;
+}
+
+/* MODAL STYLES */
+/* MODAL - FIXED */
+turbo-frame#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  /* By default, let clicks pass through (so you can click the page behind it) */
+  pointer-events: none; 
+}
+
+/* BUT, if the frame actually has content inside (the backdrop), block clicks */
+turbo-frame#modal:has(.modal-backdrop) {
+  pointer-events: auto; 
+}
+
+.modal-backdrop {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker tint */
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: relative; /* Needed for absolute positioning of the X button */
+  width: 100%;
+  max-width: 400px;
+  animation: slideUp 0.3s ease-out;
+}
+
+/* The X Button */
+.close-modal-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #678;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.close-modal-btn:hover {
+  color: #fff;
+}
