@@ -30,6 +30,9 @@ gem "solid_cable"
 
 gem "httparty"
 
+# User authentication and management [https://github.com/heartcombo/devise]
+gem "devise"
+
 gem 'countries', require: 'countries/global'
 
 # Reduces boot times through caching; required in config/boot.rb

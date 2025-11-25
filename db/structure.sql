@@ -30,7 +30,7 @@ CREATE TABLE `developers` (
   `country` varchar(100) DEFAULT NULL,
   `website` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`developer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `follows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -120,7 +120,7 @@ CREATE TABLE `games` (
   `summary` text,
   `cover_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`game_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=500 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `genres`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -130,7 +130,7 @@ CREATE TABLE `genres` (
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`genre_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `list_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -190,7 +190,7 @@ CREATE TABLE `platforms` (
   `name` varchar(100) DEFAULT NULL,
   `manufacturer` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`platform_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `publishers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -201,7 +201,7 @@ CREATE TABLE `publishers` (
   `country` varchar(100) DEFAULT NULL,
   `website` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`publisher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=286 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `reviews`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -235,13 +235,19 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `password_hash` varchar(255) DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `join_date` datetime(6) DEFAULT NULL,
   `bio` varchar(500) DEFAULT NULL,
+  `encrypted_password` varchar(255) NOT NULL DEFAULT '',
+  `reset_password_token` varchar(255) DEFAULT NULL,
+  `reset_password_sent_at` datetime(6) DEFAULT NULL,
+  `remember_created_at` datetime(6) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL,
   PRIMARY KEY (`user_id`),
+  UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_username` (`username`),
-  UNIQUE KEY `index_users_on_email` (`email`)
+  UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -255,5 +261,6 @@ CREATE TABLE `users` (
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
 INSERT INTO `schema_migrations` (version) VALUES
+('20251125174131'),
 ('20251106034516');
 

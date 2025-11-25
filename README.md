@@ -23,3 +23,10 @@ The web server and db are already up and running. Database is at localhost:3306 
 ```bash
 docker exec -it rails_web bundle exec rails db:reset
 ```
+
+### Anytime Gemfile or core files are changed...
+Core volumes have changed and need to delete cache for new container builds
+```bash
+docker-compose down --volumes
+# Repeat steps above for install
+```
