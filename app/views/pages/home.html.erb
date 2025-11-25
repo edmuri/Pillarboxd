@@ -19,6 +19,32 @@
 
 </div>
 
+<div class="poster-section">
+  <div class="section-header">
+    <h4 class="section-label">Highest Rated Games</h4>
+    <a href="<%= games_path %>" class="see-all-link">More</a>
+  </div>
+
+  <div class="poster-row">
+    <% @top_games.each do |game| %>
+      
+      <%= link_to game_path(game), class: "poster-card", title: game.title do %>
+        <div class="poster-image-wrapper">
+          <img src="<%= game.cover_url.gsub('t_thumb', 't_cover_big') %>" 
+               alt="<%= game.title %>"
+               loading="lazy"> <div class="hover-overlay">
+            <span class="rating-overlay-text">
+              ★ <%= (game.reviews.average(:rating) || 0).to_f.round(1) %>
+            </span>
+          </div>
+
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+
 <div class="features-section">
   <h4 class="section-label">Pillarboxd lets you...</h4>
   
@@ -68,3 +94,60 @@
 
   </div>
 </div>
+
+<div class="poster-section">
+  <div class="section-header">
+    <h4 class="section-label">Newest Releases</h4>
+    <a href="<%= games_path %>" class="see-all-link">More</a>
+  </div>
+
+  <div class="poster-row">
+    <% @new_games.each do |game| %>
+      
+      <%= link_to game_path(game), class: "poster-card", title: game.title do %>
+        <div class="poster-image-wrapper">
+          <img src="<%= game.cover_url.gsub('t_thumb', 't_cover_big') %>" 
+               alt="<%= game.title %>"
+               loading="lazy">
+
+          <div class="hover-overlay">
+            <span class="release-date">
+              <%= game.release_date.strftime("%b %d, %Y") %>
+            </span>
+          </div>
+          
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+
+<div class="poster-section">
+  <div class="section-header">
+    <h4 class="section-label">Upcoming Releases</h4>
+    <a href="<%= games_path %>" class="see-all-link">More</a>
+  </div>
+
+  <div class="poster-row">
+    <% @upcoming_games.each do |game| %>
+      
+      <%= link_to game_path(game), class: "poster-card", title: game.title do %>
+        <div class="poster-image-wrapper">
+          <img src="<%= game.cover_url.gsub('t_thumb', 't_cover_big') %>" 
+               alt="<%= game.title %>"
+               loading="lazy">
+
+          <div class="hover-overlay">
+            <span class="release-date">
+              <%= game.release_date.strftime("%b %d, %Y") %>
+            </span>
+          </div>
+          
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+
