@@ -203,6 +203,20 @@ body {
   letter-spacing: 1px;
 }
 
+.hero-game-link {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.hero-game-link:hover {
+  color: #00e054;
+  border-bottom-color: #00e054;
+  text-shadow: 0 0 10px rgba(0, 224, 84, 0.5);
+}
+
 /* HIGHLY RATED GAMES */
 /* CONTAINER SPACING */
 .poster-section {

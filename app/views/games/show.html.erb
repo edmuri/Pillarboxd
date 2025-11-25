@@ -1,10 +1,77 @@
-<h1><%= @game.title %></h1>
+<div class="game-backdrop" 
+     style="background-image: linear-gradient(to bottom, rgba(20, 24, 28, 0.6), #14181c), url('<%= @game.cover_url.gsub('t_thumb', 't_screenshot_huge') %>');">
+</div>
 
-<img src="<%= @game.cover_url %>" alt="Cover Image">
+<div class="game-container">
+  
+  <div class="game-sidebar">
+    <div class="game-poster-wrapper">
+      <img src="<%= @game.cover_url.gsub('t_thumb', 't_cover_big') %>" alt="<%= @game.title %>">
+    </div>
 
-<p><strong>Release Date:</strong> <%= @game.release_date %></p>
+    <div class="game-actions">
+      <div class="action-row">
+  
+        <span class="stat-box">
+          <div class="stat-value">
+            <%= (@game.reviews.average(:rating) || 0).to_f.round(1) %>
+          </div>
+          <div class="stat-label">Avg Rating</div>
+        </span>
 
-<h3>Summary</h3>
-<p><%= @game.summary %></p>
+        <span class="stat-box">
+          <div class="stat-value">
+            <%= @game.logs.count %>
+          </div>
+          <div class="stat-label">Logs</div>
+        </span>
 
-<%= link_to "Back to Games", games_path %>
+      </div>
+      
+      <% if user_signed_in? %>
+        <button class="btn-action btn-green">Log or Review</button>
+        <button class="btn-action btn-gray">Add to List</button>
+      <% else %>
+        <%= link_to "Sign in to Log", new_user_session_path, class: "btn-action btn-gray", data: { turbo_frame: "modal" } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="game-details">
+    
+    <h1 class="game-title">
+      <%= @game.title %> 
+      <span class="game-year">(<%= @game.release_date&.year %>)</span>
+    </h1>
+
+    <div class="game-meta-row">
+      <% if @game.developers.any? %>
+        <span class="meta-item">
+          Directed by <strong class="text-white"><%= @game.developers.map(&:name).join(", ") %></strong>
+        </span>
+      <% end %>
+    </div>
+
+    <div class="game-summary">
+      <h3 class="section-heading">SYNOPSIS</h3>
+      <p><%= @game.summary %></p>
+    </div>
+
+    <div class="game-specs">
+      <div class="spec-group">
+        <span class="spec-label">Genres</span>
+        <span class="spec-content">
+          <%= @game.genres.map(&:name).join(", ") %>
+        </span>
+      </div>
+      
+      <div class="spec-group">
+        <span class="spec-label">Platforms</span>
+        <span class="spec-content">
+          <%= @game.platforms.map(&:name).join(", ") %>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>

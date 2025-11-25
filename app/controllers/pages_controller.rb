@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     # Pick a random featured game to display on the home page
-    @featured_game = Game.where(title: "Watch Dogs: Legion").first || Game.first
+    @featured_game = Game.where(title: "Payday 2: Crimewave Edition").first || Game.first
 
     # Select the top 6 games based on review scores, excluding those without a cover image
     @top_games = Game
