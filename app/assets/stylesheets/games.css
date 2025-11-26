@@ -309,10 +309,30 @@ body {
 }
 
 .game-meta-row {
-  color: #9ab;
+  display: flex;
+  gap: 40px;
   margin-bottom: 30px;
   border-bottom: 1px solid #456;
   padding-bottom: 20px;
+}
+
+.meta-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  color: #9ab;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.meta-value {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .section-heading {

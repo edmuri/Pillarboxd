@@ -1,0 +1,71 @@
+<div class="developer-header">
+  <div class="header-content">
+    <h1 class="dev-name"><%= @developer.name %></h1>
+    
+    <% if @developer.country.present? %>
+      <div class="dev-location">📍 <%= @developer.country %></div>
+    <% end %>
+
+    <% if @developer.website.present? %>
+      <div class="dev-website">
+        <%= link_to @developer.website, target: "_blank", rel: "noopener noreferrer", class: "website-link" do %>
+          🔗 Official Website
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="dev-stats">
+      <div class="stat-item">
+        <span class="stat-number"><%= @games_count %></span>
+        <span class="stat-label">Games</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="stat-number"><%= (@avg_rating || 0).to_f.round(1) %></span>
+        <span class="stat-label">Avg Rating</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content-container">
+
+  <% if @top_games.any? %>
+    <h4 class="section-label">Highest Rated Projects</h4>
+    <div class="poster-row">
+      <% @top_games.each do |game| %>
+        <%= link_to game_path(game), class: "poster-card", title: game.title do %>
+          <div class="poster-image-wrapper">
+            <img src="<%= game.cover_url.gsub('t_thumb', 't_cover_big') %>" loading="lazy">
+            <% if (rating = game.reviews.average(:rating)) %>
+              <div class="poster-rating">★ <%= rating.to_f.round(1) %></div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <h4 class="section-label" style="margin-top: 40px;">Complete Ludography</h4>
+  <table class="simple-table">
+    <thead>
+      <tr>
+        <th class="text-left">Year</th>
+        <th class="text-left">Title</th>
+        <th class="text-right">Reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @games.each do |game| %>
+        <tr>
+          <td class="text-gray"><%= game.release_date&.year || "TBA" %></td>
+          <td>
+            <%= link_to game.title, game_path(game), class: "table-link" %>
+          </td>
+          <td class="text-right text-gray"><%= game.reviews.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

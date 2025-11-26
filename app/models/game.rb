@@ -5,6 +5,9 @@ class Game < ApplicationRecord
   # Associations
   has_many :game_developers
   has_many :developers, through: :game_developers
+
+  has_many :game_publishers
+  has_many :publishers, through: :game_publishers
   
   has_many :game_genres
   has_many :genres, through: :game_genres

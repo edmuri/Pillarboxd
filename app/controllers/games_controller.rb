@@ -16,6 +16,6 @@ class GamesController < ApplicationController
 
   def show
     # Find the game and eager load associations to prevent N+1 queries
-    @game = Game.includes(:developers, :genres, :platforms).find(params[:id])
+    @game = Game.includes(:developers, :publishers, :genres, :platforms).find(params[:id])
   end
 end

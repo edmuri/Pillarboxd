@@ -45,11 +45,32 @@
     </h1>
 
     <div class="game-meta-row">
-      <% if @game.developers.any? %>
-        <span class="meta-item">
-          Directed by <strong class="text-white"><%= @game.developers.map(&:name).join(", ") %></strong>
+  
+      <div class="meta-group">
+        <span class="meta-label">Developer</span>
+        <span class="meta-value">
+          <% if @game.developers.any? %>
+            <% @game.developers.each_with_index do |dev, index| %>
+              <%= link_to dev.name, developer_path(dev), class: "hero-game-link", style: "font-size: 1rem; font-weight: normal; border: none;" %>
+              <%= ", " unless index == @game.developers.size - 1 %>
+            <% end %>
+          <% else %>
+            N/A
+          <% end %>
         </span>
-      <% end %>
+      </div>
+
+      <div class="meta-group">
+        <span class="meta-label">Publisher</span>
+        <span class="meta-value">
+          <% if @game.publishers.any? %>
+            <%= @game.publishers.map(&:name).join(", ") %>
+          <% else %>
+            N/A
+          <% end %>
+        </span>
+      </div>
+
     </div>
 
     <div class="game-summary">
