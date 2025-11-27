@@ -21,13 +21,13 @@ class Schema < ActiveRecord::Migration[8.1]
         create_table :developers, primary_key: :developer_id, id: :integer, if_not_exists: true do |t|
         t.string :name, limit: 100
         t.string :country, limit: 100
-        t.string :website, limit: 100
+        t.string :website, limit: 255
         end
 
         create_table :publishers, primary_key: :publisher_id, id: :integer, if_not_exists: true do |t|
         t.string :name, limit: 100
         t.string :country, limit: 100
-        t.string :website, limit: 100
+        t.string :website, limit: 255
         end
 
         create_table :genres, primary_key: :genre_id, id: :integer, if_not_exists: true do |t|

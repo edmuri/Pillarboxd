@@ -20,7 +20,7 @@ class IGDBclient
 
     def get_games(limit, offset)
         body = "
-            fields name,cover.url,summary,first_release_date,release_dates.date,platforms.name,genres.name,involved_companies.publisher,involved_companies.developer,involved_companies.company.name,involved_companies.company.country,involved_companies.company.websites.url;
+            fields name,cover.url,summary,first_release_date,release_dates.date,platforms.name,genres.name,involved_companies.publisher,involved_companies.developer,involved_companies.company.name,involved_companies.company.country,involved_companies.company.websites.url,themes.name;
             limit #{limit};
             offset #{offset};
         "
@@ -89,7 +89,7 @@ end
 
 client = IGDBclient.new
 
-batches = 1
+batches = 10
 limit = 500
 offset = 0
 
@@ -101,6 +101,12 @@ while batches != 0
     end
     offset += limit
     games.each do |g|
+        if g["themes"].present?
+            if g["themes"].any? { |t| t["name"] == "Erotica" }
+                puts "Skipping Erotica title: #{g['name']}"
+                next
+            end
+        end
         release = Time.at(0).to_datetime
         cover_url = "NO COVER"
         if g.dig("cover", "url")
