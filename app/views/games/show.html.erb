@@ -64,7 +64,10 @@
         <span class="meta-label">Publisher</span>
         <span class="meta-value">
           <% if @game.publishers.any? %>
-            <%= @game.publishers.map(&:name).join(", ") %>
+            <% @game.publishers.each_with_index do |pub, index| %>
+              <%= link_to pub.name, publisher_path(pub), class: "hero-game-link", style: "font-size: 1rem; font-weight: normal; border: none;" %>
+              <%= ", " unless index == @game.publishers.size - 1 %>
+            <% end %>
           <% else %>
             N/A
           <% end %>

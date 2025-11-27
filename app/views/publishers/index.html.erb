@@ -1,0 +1,46 @@
+<div class="main-content-container" style="padding-top: 40px;">
+  
+  <div class="section-header">
+    <h4 class="section-label">All Publishers</h4>
+    <span class="section-label" style="color: #678;">
+      <%= @publishers.length %> Companies
+    </span>
+  </div>
+
+  <table class="simple-table hover-table">
+    <thead>
+      <tr>
+        <th class="text-left">Name</th>
+        <th class="text-left">Location</th>
+        <th class="text-center">Games</th>
+        <th class="text-center">Avg Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @publishers.each do |pub| %>
+        <tr onclick="window.location='<%= publisher_path(pub) %>'" style="cursor: pointer;">
+          
+          <td>
+            <div style="font-weight: bold; color: #fff; font-size: 1rem;">
+              <%= pub.name %>
+            </div>
+          </td>
+
+          <td class="text-gray"><%= pub.country || "—" %></td>
+          <td class="text-center text-white"><%= pub.games_count %></td>
+
+          <td class="text-center">
+            <% if pub.avg_rating %>
+              <span style="color: #00e054; font-weight: bold;">
+                <%= pub.avg_rating.to_f.round(1) %>
+              </span>
+            <% else %>
+              <span class="text-gray">—</span>
+            <% end %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

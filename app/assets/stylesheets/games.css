@@ -1,5 +1,5 @@
 /* General Page Background (Dark Theme) */
-body {
+.library-container {
   background-color: #14181c; /* Letterboxd dark grey */
   color: #9ab; /* Light grey/blue text */
   font-family: 'Helvetica', 'Arial', sans-serif;
