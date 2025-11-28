@@ -1,0 +1,70 @@
+<div class="logs-container">
+    <div class="header-section">
+    
+        <div class="header-left">
+        <h1 class="page-title">Game Logs</h1>
+        <p class="log-stats">
+            <% if params[:query].present? %>
+            Found <strong><%= @logged.count %></strong> results for "<em><%= params[:query] %></em>"
+            <% else %>
+            You have logged <strong><%= number_with_delimiter(@logged.count) %></strong> games.
+            <% end %>
+        </p>
+        </div>
+
+        <div class="header-right">
+        <%= form_with url: logs_path, method: :get, local: true, class: "search-form" do |form| %>
+            
+            <%= form.text_field :query, 
+                value: params[:query], 
+                placeholder: "Find a game review...", 
+                class: "search-input" 
+            %>
+
+            <% if params[:query].present? %>
+            <%= link_to "✕", logs_path, class: "clear-search-btn", title: "Clear Filter" %>
+            <% end %>
+
+            <%= form.submit "Search", class: "search-button" %>
+        <% end %>
+        </div>
+        
+    </div>
+    <div class="game-grid">
+        <% @logged.each do |game| %>
+        <%= link_to game_path(game.game_id), class: "game-card" do %>
+            
+            <div class="poster-frame">
+                <% if game.cover_url.present? && game.cover_url != "NO COVER" %>
+                    <img src="<%= game.cover_url %>" alt="<%= game.title %>" loading="lazy">
+                <% else %>
+                    <div class="no-image">
+                    Cover Art<br>Not Available
+                    </div>
+                <% end %>
+                <div class="hover-overlay">
+                    <span class="play-overlay-text">
+                    Played : <%= game.play_date.strftime("%b %d, %Y") %>
+                    </span>
+                </div>
+            </div>
+
+            <div class="game-info">
+            <span class="title"><%= game.title %></span>
+            </div>
+            
+        <% end %>
+        <% end %>
+    </div>
+
+    <div class="pagination" style="text-align:center;margin-top:30px;">
+            <%= paginate @logged %>
+    </div>
+    
+    <% if @logged.empty? %>
+        <div style="text-align: center; margin-top: 50px; color: #678;">
+        <h2>No games found matching "<%= params[:query] %>"</h2>
+        <%= link_to "Clear Search", games_path, style: "color: #00e054;" %>
+        </div>
+    <% end %>
+</div>

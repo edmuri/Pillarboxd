@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   get "pages/home"
   get "games/index"
   get "games/show"
+  get "logs/index"
+  get "logs/show"
 
   resources :games do
     resources :reviews, only: [:new, :create]
   end
   resources :developers
   resources :publishers
-  
+  resources :logs
+  resources :log_game
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

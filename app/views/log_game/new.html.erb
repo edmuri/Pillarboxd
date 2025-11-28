@@ -1,0 +1,49 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-backdrop" onclick="this.closest('turbo-frame').src = null; this.closest('turbo-frame').innerHTML = ''">
+    
+    <div class="modal-content" onclick="event.stopPropagation()">
+      
+      <div class="log-container">
+        <button type="button" class="close-modal-btn" onclick="document.getElementById('modal').removeAttribute('src'); document.getElementById('modal').innerHTML = ''">
+          &times;
+        </button>
+
+         <% if @log_game.errors.any? %>
+                <div class="form-errors">
+                <ul>
+                    <% @log_game.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                </ul>
+                </div>
+            <% end %>
+
+        <h2>Log Your Recent Play</h2>
+
+        <%= form_for(@log_game,url: log_game_index_path,
+            html: { class: "log-form", data: { turbo_frame: "_top" } }) do |f| %>
+
+          <div class="field">
+            <%= f.label :game %>
+            <%= f.text_field :game, autofocus: true, autocomplete: "game", class: "input #{'input-error' if @log_game.errors[:game].any?}" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :play_date %>
+            <%= f.date_field :play_date, autofocus: true, autocomplete: "play_date", class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :is_completed, "Completed Game" %>
+            <%= f.check_box :is_completed, autofocus: true,class: "checkbox-input" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Log", class: "log-btn" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+<% end %>

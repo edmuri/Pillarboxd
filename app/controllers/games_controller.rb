@@ -5,10 +5,12 @@ class GamesController < ApplicationController
     # apply filter if it exists
     if params[:query].present?
       @games = @all_games.where("title LIKE ?", "%#{params[:query]}%")
+    else
+      @games = @all_games
     end
 
     # order games: those without cover first, then alphabetically by title
-    @games = @all_games.order(
+    @games = @games.order(
       Arel.sql("CASE WHEN cover_url = 'NO COVER' THEN 1 ELSE 0 END"), 
       :title
     )
