@@ -11,10 +11,13 @@
 
     <div class="game-actions">
       <div class="action-row">
-  
         <span class="stat-box">
           <div class="stat-value">
             <%= (@game.reviews.average(:rating) || 0).to_f.round(1) %>
+            
+            <span class="review-count-small">
+              (<%= @game.reviews.count %>)
+            </span>
           </div>
           <div class="stat-label">Avg Rating</div>
         </span>
@@ -25,15 +28,26 @@
           </div>
           <div class="stat-label">Logs</div>
         </span>
-
       </div>
       
-      <% if user_signed_in? %>
-        <button class="btn-action btn-green">Log or Review</button>
-        <button class="btn-action btn-gray">Add to List</button>
-      <% else %>
-        <%= link_to "Sign in to Log", new_user_session_path, class: "btn-action btn-gray", data: { turbo_frame: "modal" } %>
-      <% end %>
+      <div class="button-row">
+        <% if user_signed_in? %>
+  
+          <% if Review.exists?(user: current_user, game: @game) %>
+            <button class="btn-action btn-gray" disabled>Reviewed</button>
+          <% else %>
+            <%= link_to "Review", new_game_review_path(@game), 
+                class: "btn-action btn-green", 
+                data: { turbo_frame: "modal" } %>
+          <% end %>
+
+          <button class="btn-action btn-gray">Add to List</button>
+
+        <% else %>
+          <%= link_to "Sign in to Log", new_user_session_path, class: "btn-action btn-gray", data: { turbo_frame: "modal" } %>
+        <% end %>
+      </div>
+      
     </div>
   </div>
 
@@ -95,6 +109,85 @@
           <%= @game.platforms.map(&:name).join(", ") %>
         </span>
       </div>
+    </div>
+
+    <div class="reviews-container">
+      
+      <%= turbo_frame_tag "reviews_feed" do %>
+        
+        <div class="reviews-header-row">
+          <h3 class="section-heading" style="border: none; margin: 0;">REVIEWS</h3>
+          
+          <div class="review-sort-options">
+            <span class="sort-label">Sort by</span>
+            
+            <%= link_to "Newest", game_path(@game, sort: "newest"), 
+                class: "sort-link #{@sort_type == 'newest' ? 'active' : ''}" %>
+            
+            <%= link_to "Highest", game_path(@game, sort: "highest"), 
+                class: "sort-link #{@sort_type == 'highest' ? 'active' : ''}" %>
+            
+            <%= link_to "Lowest", game_path(@game, sort: "lowest"), 
+                class: "sort-link #{@sort_type == 'lowest' ? 'active' : ''}" %>
+          </div>
+        </div>
+
+        <div style="border-bottom: 1px solid #456; margin-bottom: 20px; margin-top: 10px;"></div>
+
+        <% if @reviews.any? %>
+          <% @reviews.each do |review| %>
+            <div class="review-card">
+              
+              <div class="review-avatar">
+                <%= review.user.username[0].upcase %>
+              </div>
+
+              <div class="review-content">
+                <div class="review-header">
+                  <span class="review-user"><%= review.user.username %></span>
+                  <span class="review-rating">
+                    <% review.rating.to_i.times do %>★<% end %>
+                    <% if review.rating % 1 != 0 %>½<% end %>
+                  </span>
+                </div>
+                
+                <div class="review-body">
+                  <%= simple_format(review.review_text) %>
+                </div>
+                
+                <div class="review-date">
+                  <%= review.review_date.strftime("%b %d, %Y") %>
+                </div>
+              </div>
+
+            </div>
+          <% end %>
+          <div class="pagination-controls">
+          
+            <% if @page > 1 %>
+              <%= link_to "← Previous", game_path(@game, page: @page - 1, sort: @sort_type), 
+                  class: "pagination-btn" %>
+            <% else %>
+              <span></span> 
+            <% end %>
+
+            <span class="pagination-info">Page <%= @page %></span>
+
+            <% if @more_reviews_exist %>
+              <%= link_to "Next →", game_path(@game, page: @page + 1, sort: @sort_type), 
+                  class: "pagination-btn" %>
+            <% else %>
+              <span></span>
+            <% end %>
+
+          </div>
+        <% else %>
+          <p style="color: #678; font-style: italic; margin-top: 20px;">
+            No reviews found.
+          </p>
+        <% end %>
+
+      <% end %> 
     </div>
 
   </div>

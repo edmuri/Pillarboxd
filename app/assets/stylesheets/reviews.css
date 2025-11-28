@@ -1,0 +1,37 @@
+/* CONTAINER */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse; 
+  justify-content: flex-end; 
+  gap: 5px;
+}
+
+/* HIDE RADIO BUTTONS */
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+/* STAR STYLES */
+.star-rating label {
+  font-size: 2rem; 
+  color: #456;     
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+/* HOVER & CHECKED STATES */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #00e054;
+}
+
+.star-rating input:checked ~ label {
+  color: #00e054;
+}
+
+.star-rating input:checked + label:hover,
+.star-rating input:checked ~ label:hover,
+.star-rating label:hover ~ input:checked ~ label,
+.star-rating input:checked ~ label:hover ~ label {
+  color: #00e054;
+}

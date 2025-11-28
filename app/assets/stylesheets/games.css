@@ -252,11 +252,17 @@
 }
 
 /* === ACTIONS / STATS === */
+.game-actions {
+  width: 100%;
+}
+
 .action-row {
   display: flex;
   justify-content: space-around;
   margin-bottom: 15px;
   text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 15px;
 }
 
 .stat-value {
@@ -270,11 +276,26 @@
   text-transform: uppercase;
 }
 
-.btn-action {
-  display: block;
+.review-count-small {
+  font-size: 0.6em;
+  color: #678;     
+  font-weight: normal;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+}
+
+.btn-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
   text-align: center;
   border-radius: 3px;
   text-decoration: none;
@@ -283,6 +304,7 @@
   text-transform: uppercase;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-green { background-color: #00b040; color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.2); }
@@ -437,4 +459,151 @@
   .game-title {
     text-align: center;
   }
+}
+
+/* REVIEWS SECTION */
+.reviews-container {
+  margin-top: 50px;
+  border-top: 1px solid #456; 
+  padding-top: 20px;
+}
+
+.review-card {
+  display: flex;
+  gap: 15px;
+  padding: 20px 0;
+  border-bottom: 1px solid #2c3440;
+}
+.review-card:last-child {
+  border-bottom: none;
+}
+
+/* AVATAR CIRCLE */
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #456;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* CONTENT */
+.review-content {
+  flex-grow: 1;
+}
+
+/* Header layout */
+.review-header {
+  margin-bottom: 5px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.reviews-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* Sort Menu */
+.review-sort-options {
+  font-size: 0.8rem;
+  color: #678;
+}
+
+.sort-label {
+  margin-right: 5px;
+  text-transform: uppercase;
+}
+
+.sort-link {
+  color: #9ab;
+  text-decoration: none;
+  margin-left: 10px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.sort-link:hover {
+  color: #fff;
+}
+
+/* The Active State (Current Selection) */
+.sort-link.active {
+  color: #00e054;
+  border-bottom: 1px solid #00e054;
+}
+
+.review-user {
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.review-rating {
+  color: #00e054;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.review-body {
+  color: #dde;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.review-body p {
+  margin: 0 0 10px 0;
+}
+.review-body p:last-child {
+  margin-bottom: 0;
+}
+
+.review-date {
+  color: #678;
+  font-size: 0.75rem;
+}
+
+/* PAGINATION CONTAINER */
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #2c3440;
+}
+
+/* THE BUTTONS */
+.pagination-btn {
+  background-color: #2c3440;
+  color: #9ab;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+
+.pagination-btn:hover {
+  background-color: #456;
+  color: #fff;
+}
+
+/* PAGE NUMBER TEXT */
+.pagination-info {
+  color: #678;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

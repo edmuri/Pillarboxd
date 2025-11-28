@@ -1,7 +1,13 @@
 class Review < ApplicationRecord
   self.primary_key = "review_id"
+  self.record_timestamps = false
+
+  belongs_to :user
+  belongs_to :game
+
+  validates :rating, presence: true, inclusion: { in: 1..5 }
+  validates :review_text, length: { maximum: 2000 } # Optional limit
   
-  # Connects back to the Game model
-  belongs_to :game, foreign_key: "game_id"
-  belongs_to :user, foreign_key: "user_id"
+  # The "One Review Per Game" Rule:
+  validates :user_id, uniqueness: { scope: :game_id, message: "You have already reviewed this game" }
 end
