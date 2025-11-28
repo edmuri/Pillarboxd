@@ -8,7 +8,7 @@
         <% if params[:query].present? %>
           Found <strong><%= @games.count %></strong> results for "<em><%= params[:query] %></em>"
         <% else %>
-          There are <strong><%= number_with_delimiter(@games.count) %></strong> games.
+          There are <strong><%= number_with_delimiter(@all_games.count) %></strong> games.
         <% end %>
       </p>
     </div>
@@ -52,6 +52,10 @@
         
       <% end %>
     <% end %>
+  </div>
+
+  <div class="pagination" style="text-align:center;margin-top:30px;">
+        <%= paginate @games %>
   </div>
   
   <% if @games.empty? %>

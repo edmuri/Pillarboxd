@@ -375,6 +375,56 @@
 
 .text-white { color: #fff; }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+/* div > span > a */
+.pagination a{
+  /* text-align: center; */
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  padding:5px;
+  text-decoration: none;
+  color: #9ab;
+  /* min-height: 100px;  */
+  min-width: 40px;
+}
+
+.pagination span {
+  background-color: #2c3440;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid #456;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  min-height: 20px;
+  overflow:hidden;
+}
+
+/* The current page*/
+.pagination .current {
+  padding: 6px 10px;
+  background-color: #00e054;
+  color: #14181c;
+  border-color: #00e054;
+  font-weight: bold;
+}
+
+/* Hover effects */
+.pagination a:hover {
+  background-color: #00e054;
+  color: #14181c;
+  border-color: #00e054;
+  border-radius: 20px;
+  box-shadow: 0 0 6px rgba(0, 224, 84, 0.5);
+}
+
 /* RESPONSIVE */
 @media (max-width: 700px) {
   .game-container {

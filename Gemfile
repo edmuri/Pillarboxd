@@ -29,6 +29,7 @@ gem "solid_queue"
 gem "solid_cable"
 
 gem "httparty"
+gem "kaminari"
 
 # User authentication and management [https://github.com/heartcombo/devise]
 gem "devise"
