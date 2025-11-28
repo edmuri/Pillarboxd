@@ -21,5 +21,7 @@ class GamesController < ApplicationController
   def show
     # Find the game and eager load associations to prevent N+1 queries
     @game = Game.includes(:developers, :publishers, :genres, :platforms).find(params[:id])
+
+    @reviews = @game.reviews.includes(:user).where.not(review_text: [nil, ""]).order(review_date: :desc).limit(10)
   end
 end

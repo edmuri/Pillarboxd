@@ -111,5 +111,41 @@
       </div>
     </div>
 
+    <div class="reviews-container">
+      <h3 class="section-heading">REVIEWS</h3>
+
+      <% if @reviews.any? %>
+        <% @reviews.each do |review| %>
+          <div class="review-card">
+            
+            <div class="review-avatar">
+              <%= review.user.username[0].upcase %>
+            </div>
+
+            <div class="review-content">
+              <div class="review-header">
+                <span class="review-user"><%= review.user.username %></span>
+                <span class="review-rating">
+                  <% review.rating.to_i.times do %>★<% end %>
+                  <% if review.rating % 1 != 0 %>½<% end %>
+                </span>
+              </div>
+              
+              <div class="review-body">
+                <%= simple_format(review.review_text) %>
+              </div>
+              
+              <div class="review-date">
+                <%= review.review_date.strftime("%b %d, %Y") %>
+              </div>
+            </div>
+
+          </div>
+        <% end %>
+      <% else %>
+        <p style="color: #678; font-style: italic;">No reviews yet. Be the first to share your thoughts!</p>
+      <% end %>
+    </div>
+
   </div>
 </div>

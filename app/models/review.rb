@@ -1,5 +1,6 @@
 class Review < ApplicationRecord
   self.primary_key = "review_id"
+  self.record_timestamps = false
 
   belongs_to :user
   belongs_to :game
