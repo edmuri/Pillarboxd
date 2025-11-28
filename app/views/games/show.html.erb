@@ -11,10 +11,13 @@
 
     <div class="game-actions">
       <div class="action-row">
-  
         <span class="stat-box">
           <div class="stat-value">
             <%= (@game.reviews.average(:rating) || 0).to_f.round(1) %>
+            
+            <span class="review-count-small">
+              (<%= @game.reviews.count %>)
+            </span>
           </div>
           <div class="stat-label">Avg Rating</div>
         </span>
@@ -25,15 +28,26 @@
           </div>
           <div class="stat-label">Logs</div>
         </span>
-
       </div>
       
-      <% if user_signed_in? %>
-        <button class="btn-action btn-green">Log or Review</button>
-        <button class="btn-action btn-gray">Add to List</button>
-      <% else %>
-        <%= link_to "Sign in to Log", new_user_session_path, class: "btn-action btn-gray", data: { turbo_frame: "modal" } %>
-      <% end %>
+      <div class="button-row">
+        <% if user_signed_in? %>
+  
+          <% if Review.exists?(user: current_user, game: @game) %>
+            <button class="btn-action btn-gray" disabled>Reviewed</button>
+          <% else %>
+            <%= link_to "Review", new_game_review_path(@game), 
+                class: "btn-action btn-green", 
+                data: { turbo_frame: "modal" } %>
+          <% end %>
+
+          <button class="btn-action btn-gray">Add to List</button>
+
+        <% else %>
+          <%= link_to "Sign in to Log", new_user_session_path, class: "btn-action btn-gray", data: { turbo_frame: "modal" } %>
+        <% end %>
+      </div>
+      
     </div>
   </div>
 

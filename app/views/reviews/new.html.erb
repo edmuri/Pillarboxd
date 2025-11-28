@@ -1,0 +1,54 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-backdrop" onclick="this.closest('turbo-frame').src = null; this.closest('turbo-frame').innerHTML = ''">
+    
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="auth-container" style="max-width: 700px;"> <button type="button" class="close-modal-btn" onclick="document.getElementById('modal').removeAttribute('src'); document.getElementById('modal').innerHTML = ''">
+          &times;
+        </button>
+
+        <h2>Review <%= @game.title %></h2>
+
+        <%= form_with(model: [@game, @review], class: "auth-form", data: { turbo_frame: "_top" }) do |f| %>
+          
+          <% if @review.errors.any? %>
+            <div style="color: #ff5f5f; margin-bottom: 15px; font-size: 0.9rem;">
+              <%= @review.errors.full_messages.join(", ") %>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :rating, "RATING", style: "margin-bottom: 10px; display: block;" %>
+            
+            <div class="star-rating">
+              <%= f.radio_button :rating, 5, id: "star5" %>
+              <label for="star5" title="5 stars">★</label>
+
+              <%= f.radio_button :rating, 4, id: "star4" %>
+              <label for="star4" title="4 stars">★</label>
+
+              <%= f.radio_button :rating, 3, id: "star3" %>
+              <label for="star3" title="3 stars">★</label>
+
+              <%= f.radio_button :rating, 2, id: "star2" %>
+              <label for="star2" title="2 stars">★</label>
+
+              <%= f.radio_button :rating, 1, id: "star1" %>
+              <label for="star1" title="1 star">★</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label :review_text, "YOUR THOUGHTS" %>
+            <%= f.text_area :review_text, rows: 5, class: "auth-input", placeholder: "Write your review here..." %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Publish Review", class: "auth-btn" %>
+          </div>
+
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+<% end %>

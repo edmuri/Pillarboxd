@@ -252,11 +252,17 @@
 }
 
 /* === ACTIONS / STATS === */
+.game-actions {
+  width: 100%;
+}
+
 .action-row {
   display: flex;
   justify-content: space-around;
   margin-bottom: 15px;
   text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 15px;
 }
 
 .stat-value {
@@ -270,11 +276,26 @@
   text-transform: uppercase;
 }
 
-.btn-action {
-  display: block;
+.review-count-small {
+  font-size: 0.6em;
+  color: #678;     
+  font-weight: normal;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+}
+
+.btn-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
   text-align: center;
   border-radius: 3px;
   text-decoration: none;
@@ -283,6 +304,7 @@
   text-transform: uppercase;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-green { background-color: #00b040; color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.2); }
