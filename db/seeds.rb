@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-
+require_relative "help_seed"
 require 'httparty'
 require 'countries'
 
@@ -175,84 +175,7 @@ while batches != 0
     batches -= 1
 end
 
-##########################################################################################
-### MANUALLY POPULATING DATA AFTER API TO HAVE PRELOADED DATA ###
-##########################################################################################
-
-############################################
-#############      USERS   #################
-############################################
-User.find_or_create_by!(email: "admin@gmail.com") do |u|
-    u.username="admin"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "emuri@uic.com") do |u|
-    u.username = "emuri"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "emuri@gmail.com") do |u|
-    u.username="emuri1"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "jpenn@gmail.com") do |u|
-    u.username="jpenn"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "cvarn@gmail.com") do |u|
-    u.username="cvarn"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "jgodf@gmail.com") do |u|
-    u.username="jgodf"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "jbowma@gmail.com") do |u|
-    u.username="jbowma"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "btion@gmail.com") do |u|
-    u.username="btion"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-User.find_or_create_by!(email: "jcarm@gmail.com") do |u|
-    u.username="jcarm"
-    u.password = "password123"
-    u.password_confirmation = "password123"
-    u.join_date = Time.current
-end
-
-############################################
-#############      LOGS    #################
-############################################
-
-
-############################################
-#############    REVIEWS   #################
-############################################
+seed_manually
 
 
 
