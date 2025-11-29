@@ -1,4 +1,5 @@
 class LogsController < ApplicationController
+    before_action :authenticate_user!
     def index
         if current_user
             @all_logged = Game.left_joins(:logs)
