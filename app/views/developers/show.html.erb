@@ -46,26 +46,105 @@
     </div>
   <% end %>
 
-  <h4 class="section-label" style="margin-top: 40px;">Complete Ludography</h4>
-  <table class="simple-table">
-    <thead>
-      <tr>
-        <th class="text-left">Year</th>
-        <th class="text-left">Title</th>
-        <th class="text-right">Reviews</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @games.each do |game| %>
+  <%= turbo_frame_tag "games_catalog" do %>
+
+    <div class="reviews-header-row" style="margin-top: 40px; margin-bottom: 15px;">
+      <h4 class="section-label" style="margin: 0;">Complete Ludography</h4>
+      
+      <div class="review-sort-options">
+        <span class="sort-label">Sort by:</span>
+        
+        <%= link_to "Newest", developer_path(@developer, sort: 'newest'), 
+            class: "sort-link #{@sort == 'newest' ? 'active' : ''}" %>
+
+        <%= link_to "Oldest", developer_path(@developer, sort: 'oldest'), 
+            class: "sort-link #{@sort == 'oldest' ? 'active' : ''}" %>
+        
+        <%= link_to "Highest Rated", developer_path(@developer, sort: 'rating_desc'), 
+            class: "sort-link #{@sort == 'rating_desc' ? 'active' : ''}" %>
+
+        <%= link_to "Name", developer_path(@developer, sort: 'name_asc'), 
+            class: "sort-link #{@sort == 'name_asc' ? 'active' : ''}" %>
+      </div>
+    </div>
+    
+    <table class="simple-table">
+      <thead>
         <tr>
-          <td class="text-gray"><%= game.release_date&.year || "TBA" %></td>
-          <td>
-            <%= link_to game.title, game_path(game), class: "table-link" %>
-          </td>
-          <td class="text-right text-gray"><%= game.reviews.count %></td>
+          <th class="text-left">Year</th>
+          <th class="text-left">Title</th>
+          <th class="text-center">Avg Rating</th> <th class="text-right">Reviews</th>
         </tr>
+      </thead>
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td class="text-gray"><%= game.release_date&.year || "TBA" %></td>
+            
+            <td>
+              <%= link_to game.title, game_path(game), 
+                  class: "table-link", 
+                  data: { turbo_frame: "_top" } %>
+            </td>
+
+            <td class="text-center">
+              <% if game.computed_rating && game.computed_rating > 0 %>
+                <span style="color: #00e054; font-weight: bold;">
+                  <%= game.computed_rating.to_f.round(1) %>
+                </span>
+              <% else %>
+                <span class="text-gray">—</span>
+              <% end %>
+            </td>
+
+            <td class="text-right text-gray"><%= game.reviews.size %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="pagination-controls">
+      
+      <% if @page > 1 %>
+        <%= link_to "←", developer_path(@developer, page: @page - 1, sort: @sort), class: "pagination-btn" %>
+      <% else %>
+        <span class="pagination-btn disabled">←</span>
       <% end %>
-    </tbody>
-  </table>
+
+      <div class="pagination-numbers">
+        <% 
+           start_p = [@page - 2, 1].max
+           end_p   = [@page + 2, @total_pages].min
+        %>
+
+        <% if start_p > 1 %>
+          <%= link_to "1", developer_path(@developer, page: 1, sort: @sort), class: "page-number" %>
+          <% if start_p > 2 %>
+            <span class="page-dots">...</span>
+          <% end %>
+        <% end %>
+
+        <% (start_p..end_p).each do |p| %>
+          <%= link_to p, developer_path(@developer, page: p, sort: @sort), 
+              class: "page-number #{'active' if p == @page}" %>
+        <% end %>
+
+        <% if end_p < @total_pages %>
+          <% if end_p < @total_pages - 1 %>
+            <span class="page-dots">...</span>
+          <% end %>
+          <%= link_to @total_pages, developer_path(@developer, page: @total_pages, sort: @sort), class: "page-number" %>
+        <% end %>
+      </div>
+
+      <% if @more_exists %>
+        <%= link_to "→", developer_path(@developer, page: @page + 1, sort: @sort), class: "pagination-btn" %>
+      <% else %>
+        <span class="pagination-btn disabled">→</span>
+      <% end %>
+
+    </div>
+
+  <% end %> </div>
 
 </div>
