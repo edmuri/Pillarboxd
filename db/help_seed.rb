@@ -83,6 +83,17 @@ def seed_manually
         is_completed: true
     )
 
+    game = Game.where("title LIKE ?", "%Sonic%").first
+
+    user = User.where("username LIKE ?", "emuri").first
+    user_id = user.user_id
+
+    log_game = game.logs.create!(
+        user_id: user_id,
+        play_date: Date.new(2025, 11, 29),
+        is_completed: true
+    )
+
     ############################################
     #############    REVIEWS   #################
     ############################################
