@@ -1,23 +1,29 @@
 class GamesController < ApplicationController
   def index
-    @all_games = Game.all
+    @page = params[:page].to_i
+    @page = 1 if @page <= 0
+    per_page = 25
+    offset = (@page - 1) * per_page
 
-    # apply filter if it exists
+    @all_games = Game.all 
+    
+    # Start our filtered query
+    scope = Game.all
+
     if params[:query].present?
-      @games = @all_games.where("title LIKE ?", "%#{params[:query]}%")
-    else
-      @games = @all_games
+      scope = scope.where("title LIKE ?", "%#{params[:query]}%")
     end
 
-    # order games: those without cover first, then alphabetically by title
-    @games = @games.order(
+    scope = scope.order(
       Arel.sql("CASE WHEN cover_url = 'NO COVER' THEN 1 ELSE 0 END"), 
       :title
     )
 
-    @games = @games.page(params[:page])
-                   .per(50)
+    @total_count = scope.count
+    @total_pages = (@total_count.to_f / per_page).ceil
+    @more_exists = @page < @total_pages
 
+    @games = scope.limit(per_page).offset(offset)
   end
 
   def show

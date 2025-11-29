@@ -54,8 +54,46 @@
     <% end %>
   </div>
 
-  <div class="pagination" style="text-align:center;margin-top:30px;">
-        <%= paginate @games %>
+  <div class="pagination-controls">
+    
+    <% if @page > 1 %>
+      <%= link_to "←", games_path(page: @page - 1, query: params[:query]), class: "pagination-btn" %>
+    <% else %>
+      <span class="pagination-btn disabled">←</span>
+    <% end %>
+
+    <div class="pagination-numbers">
+      <% 
+         start_p = [@page - 2, 1].max
+         end_p   = [@page + 2, @total_pages].min
+      %>
+
+      <% if start_p > 1 %>
+        <%= link_to "1", games_path(page: 1, query: params[:query]), class: "page-number" %>
+        <% if start_p > 2 %>
+          <span class="page-dots">...</span>
+        <% end %>
+      <% end %>
+
+      <% (start_p..end_p).each do |p| %>
+        <%= link_to p, games_path(page: p, query: params[:query]), 
+            class: "page-number #{'active' if p == @page}" %>
+      <% end %>
+
+      <% if end_p < @total_pages %>
+        <% if end_p < @total_pages - 1 %>
+          <span class="page-dots">...</span>
+        <% end %>
+        <%= link_to @total_pages, games_path(page: @total_pages, query: params[:query]), class: "page-number" %>
+      <% end %>
+    </div>
+
+    <% if @more_exists %>
+      <%= link_to "→", games_path(page: @page + 1, query: params[:query]), class: "pagination-btn" %>
+    <% else %>
+      <span class="pagination-btn disabled">→</span>
+    <% end %>
+
   </div>
   
   <% if @games.empty? %>
