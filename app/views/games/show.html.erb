@@ -162,25 +162,49 @@
 
             </div>
           <% end %>
-          <div class="pagination-controls">
+
+        <div class="pagination-controls">
           
-            <% if @page > 1 %>
-              <%= link_to "← Previous", game_path(@game, page: @page - 1, sort: @sort_type), 
-                  class: "pagination-btn" %>
-            <% else %>
-              <span></span> 
+          <% if @page > 1 %>
+            <%= link_to "←", game_path(@game, page: @page - 1, sort: @sort_type), class: "pagination-btn" %>
+          <% else %>
+            <span class="pagination-btn disabled">←</span>
+          <% end %>
+
+          <div class="pagination-numbers">
+            <% 
+               start_p = [@page - 2, 1].max
+               end_p   = [@page + 2, @total_pages].min
+            %>
+
+            <% if start_p > 1 %>
+              <%= link_to "1", game_path(@game, page: 1, sort: @sort_type), class: "page-number" %>
+              <% if start_p > 2 %>
+                <span class="page-dots">...</span>
+              <% end %>
             <% end %>
 
-            <span class="pagination-info">Page <%= @page %></span>
-
-            <% if @more_reviews_exist %>
-              <%= link_to "Next →", game_path(@game, page: @page + 1, sort: @sort_type), 
-                  class: "pagination-btn" %>
-            <% else %>
-              <span></span>
+            <% (start_p..end_p).each do |p| %>
+              <%= link_to p, game_path(@game, page: p, sort: @sort_type), 
+                  class: "page-number #{'active' if p == @page}" %>
             <% end %>
 
+            <% if end_p < @total_pages %>
+              <% if end_p < @total_pages - 1 %>
+                <span class="page-dots">...</span>
+              <% end %>
+              <%= link_to @total_pages, game_path(@game, page: @total_pages, sort: @sort_type), class: "page-number" %>
+            <% end %>
           </div>
+
+          <% if @more_reviews_exist %>
+            <%= link_to "→", game_path(@game, page: @page + 1, sort: @sort_type), class: "pagination-btn" %>
+          <% else %>
+            <span class="pagination-btn disabled">→</span>
+          <% end %>
+
+        </div>
+
         <% else %>
           <p style="color: #678; font-style: italic; margin-top: 20px;">
             No reviews found.
