@@ -105,6 +105,39 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+/* ISOLATED CHECKBOX ROW */
+.remember-me-row {
+  display: flex;      
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;             
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* The Checkbox itself */
+.custom-checkbox {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 !important;  
+  padding: 0;
+  accent-color: #00e054; 
+  cursor: pointer;
+  flex-shrink: 0;        
+}
+
+/* The Label Text */
+.custom-label {
+  margin: 0 !important;  
+  padding: 0;
+  font-size: 0.9rem;
+  color: #9ab;
+  font-weight: normal;
+  cursor: pointer;
+  display: inline-block !important;
+}
+
 /* MODAL STYLES */
 /* MODAL - FIXED */
 turbo-frame#modal {
