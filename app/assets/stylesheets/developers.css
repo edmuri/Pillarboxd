@@ -111,3 +111,72 @@
 
 .text-center { text-align: center; }
 .text-white { color: #fff; }
+
+.main-content-container {
+  padding-bottom: 60px; 
+}
+
+/* CONTAINER */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #2c3440;
+}
+
+/* ARROW BUTTONS */
+.pagination-btn {
+  background-color: #2c3440;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.pagination-btn:hover { background-color: #456; }
+.pagination-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+/* NUMBER CONTAINER */
+.pagination-numbers {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* INDIVIDUAL NUMBERS */
+.page-number {
+  color: #9ab;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.page-number:hover {
+  background-color: #2c3440;
+  color: #fff;
+}
+
+/* THE CURRENT PAGE (Green) */
+.page-number.active {
+  background-color: #00e054;
+  color: #14181c;
+  pointer-events: none;
+}
+
+/* DOTS (...) */
+.page-dots {
+  color: #678;
+  font-size: 0.8rem;
+  margin: 0 5px;
+}

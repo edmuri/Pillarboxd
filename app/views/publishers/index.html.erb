@@ -1,10 +1,25 @@
 <div class="main-content-container" style="padding-top: 40px;">
   
-  <div class="section-header">
-    <h4 class="section-label">All Publishers</h4>
-    <span class="section-label" style="color: #678;">
-      <%= @publishers.length %> Companies
-    </span>
+  <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+      <h4 class="section-label" style="display: inline;">All Publishers</h4>
+      <span class="section-label" style="color: #678; margin-left: 10px;">
+        <%= @total_count %> Companies
+      </span>
+    </div>
+
+    <div class="review-sort-options">
+      <span class="sort-label">Sort by:</span>
+      
+      <%= link_to "Most Games", publishers_path(sort: 'games_desc'), 
+          class: "sort-link #{@sort == 'games_desc' ? 'active' : ''}" %>
+      
+      <%= link_to "Highest Rated", publishers_path(sort: 'rating_desc'), 
+          class: "sort-link #{@sort == 'rating_desc' ? 'active' : ''}" %>
+          
+      <%= link_to "Name", publishers_path(sort: 'name_asc'), 
+          class: "sort-link #{@sort == 'name_asc' ? 'active' : ''}" %>
+    </div>
   </div>
 
   <table class="simple-table hover-table">
@@ -43,4 +58,48 @@
       <% end %>
     </tbody>
   </table>
+
+  <div class="pagination-controls">
+    
+    <% if @page > 1 %>
+      <%= link_to "←", publishers_path(page: @page - 1, sort: @sort), class: "pagination-btn" %>
+    <% else %>
+      <span class="pagination-btn disabled">←</span>
+    <% end %>
+
+    <div class="pagination-numbers">
+      <% 
+         # SLIDING WINDOW LOGIC
+         # Show 2 pages before and 2 pages after current page
+         start_p = [@page - 2, 1].max
+         end_p   = [@page + 2, @total_pages].min
+      %>
+
+      <% if start_p > 1 %>
+        <%= link_to "1", publishers_path(page: 1, sort: @sort), class: "page-number" %>
+        <% if start_p > 2 %>
+          <span class="page-dots">...</span>
+        <% end %>
+      <% end %>
+
+      <% (start_p..end_p).each do |p| %>
+        <%= link_to p, publishers_path(page: p, sort: @sort), 
+            class: "page-number #{'active' if p == @page}" %>
+      <% end %>
+
+      <% if end_p < @total_pages %>
+        <% if end_p < @total_pages - 1 %>
+          <span class="page-dots">...</span>
+        <% end %>
+        <%= link_to @total_pages, publishers_path(page: @total_pages, sort: @sort), class: "page-number" %>
+      <% end %>
+    </div>
+
+    <% if @more_exists %>
+      <%= link_to "→", publishers_path(page: @page + 1, sort: @sort), class: "pagination-btn" %>
+    <% else %>
+      <span class="pagination-btn disabled">→</span>
+    <% end %>
+
+  </div>
 </div>
