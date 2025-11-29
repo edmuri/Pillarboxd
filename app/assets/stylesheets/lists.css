@@ -1,0 +1,137 @@
+/* GENERAL PAGE BACKGROUND (Dark Theme) */
+.main-content-container, .lists-header {
+background-color: #14181c;
+color: #9ab;
+font-family: 'Helvetica', 'Arial', sans-serif;
+max-width: 1000px;
+margin: 0 auto;
+padding: 40px 20px;
+}
+
+/* HEADER SECTION */
+.lists-header .header-content {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-end;
+border-bottom: 1px solid #456;
+padding-bottom: 15px;
+margin-bottom: 30px;
+gap: 15px;
+}
+
+.page-title {
+color: #fff;
+border-bottom: 1px solid #456;
+margin-bottom: 25px;
+font-weight: 300;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.user-stats {
+color: #9ab;
+font-size: 0.9rem;
+}
+
+.user-stats strong {
+color: #fff;
+}
+
+.list-actions .btn {
+background-color: #00e054;
+color: #14181c;
+border: none;
+border-radius: 20px;
+padding: 8px 16px;
+font-weight: bold;
+cursor: pointer;
+text-decoration: none;
+transition: background 0.2s;
+}
+
+.list-actions .btn:hover {
+background-color: #00b040;
+}
+
+/* SIMPLE TABLE STYLING */
+.simple-table {
+width: 100%;
+border-collapse: collapse;
+margin-bottom: 30px;
+background-color: #1e2328;
+border-radius: 4px;
+overflow: hidden;
+}
+
+.simple-table th, .simple-table td {
+padding: 12px 16px;
+font-size: 0.9rem;
+}
+
+.simple-table th {
+background-color: #2c3440;
+color: #9ab;
+text-transform: uppercase;
+font-weight: 500;
+border-bottom: 1px solid #456;
+text-align: left;
+}
+
+.simple-table td {
+border-bottom: 1px solid #456;
+color: #dde;
+}
+
+.simple-table td.text-center, .simple-table th.text-center {
+text-align: center;
+}
+
+.table-link {
+color: #00e054;
+text-decoration: none;
+}
+
+.table-link:hover {
+text-decoration: underline;
+}
+
+/* PAGINATION CONTROLS */
+.pagination-controls {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 20px;
+padding-top: 20px;
+border-top: 1px solid #2c3440;
+}
+
+.pagination-btn {
+background-color: #2c3440;
+color: #9ab;
+padding: 8px 16px;
+border-radius: 4px;
+text-decoration: none;
+font-size: 0.85rem;
+font-weight: bold;
+text-transform: uppercase;
+transition: background 0.2s, color 0.2s;
+}
+
+.pagination-btn:hover {
+background-color: #456;
+color: #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+.lists-header .header-content {
+flex-direction: column;
+align-items: flex-start;
+}
+
+.simple-table th, .simple-table td {
+font-size: 0.8rem;
+padding: 10px 12px;
+}
+}

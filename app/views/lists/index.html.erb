@@ -1,62 +1,84 @@
-<div class="logs-container">
-    <div class="header-section">
+<div class="lists-header">
+  <div class="header-content">
+    <h1 class="page-title">Game Lists</h1>
+
     <% if current_user.present? %>
-        <div class="header-left">
-        <h1 class="page-title">Game Lists</h1>
-        <p class="log-stats">
-            <% if params[:query].present? %>
-            Found <strong><%= @logged.count %></strong> results for "<em><%= params[:query] %></em>"
-            <% else %>
-            You have <strong><%= number_with_delimiter(@logged.count) %></strong> lists.
-            <% end %>
-        </p>
-        </div>
-
-        
-    </div>
-    <div class="game-grid">
-        <% @logged.each do |game| %>
-        <%= link_to game_path(game.game_id), class: "game-card" do %>
-            
-            <div class="poster-frame">
-                <% if game.cover_url.present? && game.cover_url != "NO COVER" %>
-                    <img src="<%= game.cover_url %>" alt="<%= game.title %>" loading="lazy">
-                <% else %>
-                    <div class="no-image">
-                    Cover Art<br>Not Available
-                    </div>
-                <% end %>
-                <div class="hover-overlay">
-                    <span class="play-overlay-text">
-                    Played : <%= game.play_date.strftime("%b %d, %Y") %>
-                    </span>
-                </div>
-            </div>
-
-            <div class="game-info">
-            <span class="title"><%= game.title %></span>
-            </div>
-            
+      <div class="user-stats">
+        <% if params[:query].present? %>
+          Found <strong><%= number_with_delimiter(@total_count) %></strong> results for "<em><%= params[:query] %></em>"
+        <% else %>
+          You have <strong><%= number_with_delimiter(@total_count) %></strong> lists.
         <% end %>
-        <% end %>
-    </div>
-
-    <div class="pagination" style="text-align:center;margin-top:30px;">
-            <%= paginate @logged %>
-    </div>
-    
-    <% if @logged.empty? %>
-        <div style="text-align: center; margin-top: 50px; color: #678;">
-        <h2>No games found matching "<%= params[:query] %>"</h2>
-        <%= link_to "Clear Search", games_path, style: "color: #00e054;" %>
-        </div>
+      </div>
     <% end %>
-    <%else %>
-    <div class="header-left">
-        <h1 class="page-title">Game Logs</h1>
-        <p class="log-stats">
-            You have logged <strong><%= number_with_delimiter(0) %></strong> games.
-        </p>
-        </div>
-    <%end%>
+
+    <div class="list-actions">
+      <%= link_to "New List", new_list_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<div class="main-content-container">
+  <%= turbo_frame_tag "lists_catalog" do %>
+
+    <table class="simple-table">
+      <thead>
+        <tr>
+          <th class="text-left">Title</th>
+          <th class="text-left">Description</th>
+          <th class="text-center"># Items</th>
+          <th class="text-center">Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lists.each do |list| %>
+          <tr>
+            <td><%= link_to list.title, list_path(list), class: "table-link" %></td>
+            <td><%= truncate(list.description, length: 50) %></td>
+            <td class="text-center"><%= list.list_items.size %></td>
+            <td class="text-center"><%= list.created_at&.strftime("%b %d, %Y") || "-" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination-controls">
+      <% if @page > 1 %>
+        <%= link_to "←", lists_path(page: @page - 1, query: params[:query]), class: "pagination-btn" %>
+      <% else %>
+        <span class="pagination-btn disabled">←</span>
+      <% end %>
+
+      <div class="pagination-numbers">
+        <% start_p = [@page - 2, 1].max %>
+        <% end_p = [@page + 2, @total_pages].min %>
+
+        <% if start_p > 1 %>
+          <%= link_to "1", lists_path(page: 1, query: params[:query]), class: "page-number" %>
+          <% if start_p > 2 %>
+            <span class="page-dots">...</span>
+          <% end %>
+        <% end %>
+
+        <% (start_p..end_p).each do |p| %>
+          <%= link_to p, lists_path(page: p, query: params[:query]), class: "page-number #{'active' if p == @page}" %>
+        <% end %>
+
+        <% if end_p < @total_pages %>
+          <% if end_p < @total_pages - 1 %>
+            <span class="page-dots">...</span>
+          <% end %>
+          <%= link_to @total_pages, lists_path(page: @total_pages, query: params[:query]), class: "page-number" %>
+        <% end %>
+      </div>
+
+      <% if @more_exists %>
+        <%= link_to "Next →", lists_path(page: @page + 1, query: params[:query]), class: "pagination-btn" %>
+      <% else %>
+        <span class="pagination-btn disabled">→</span>
+      <% end %>
+    </div>
+
+  <% end %>
 </div>
