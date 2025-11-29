@@ -1,6 +1,6 @@
 <div class="logs-container">
     <div class="header-section">
-    
+    <% if current_user.present? %>
         <div class="header-left">
         <h1 class="page-title">Game Logs</h1>
         <p class="log-stats">
@@ -67,4 +67,12 @@
         <%= link_to "Clear Search", games_path, style: "color: #00e054;" %>
         </div>
     <% end %>
+    <%else %>
+    <div class="header-left">
+        <h1 class="page-title">Game Logs</h1>
+        <p class="log-stats">
+            You have logged <strong><%= number_with_delimiter(0) %></strong> games.
+        </p>
+        </div>
+    <%end%>
 </div>
