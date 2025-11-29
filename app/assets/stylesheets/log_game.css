@@ -154,3 +154,18 @@ input[type="checkbox"] {
 .log-btn:hover {
   background-color: #00b040;
 }
+
+.form-errors{
+    font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.form-errors > ul{
+  list-style: none;
+  color:red;
+}
+
+.form-errrors > ul > li{
+  color:red;
+}

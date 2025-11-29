@@ -8,20 +8,19 @@
           &times;
         </button>
 
-         <% if @log_game.errors.any? %>
-                <div class="form-errors">
-                <ul>
-                    <% @log_game.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                    <% end %>
-                </ul>
-                </div>
-            <% end %>
-
         <h2>Log Your Recent Play</h2>
 
-        <%= form_for(@log_game,url: log_game_index_path,
-            html: { class: "log-form", data: { turbo_frame: "_top" } }) do |f| %>
+        <%= form_with(model: @log_game,url: log_game_index_path, data: { turbo_frame: "_top" }) do |f| %>
+
+            <% if @log_game.errors.any? %>
+            <div class="form-errors">
+            <ul>
+                <% @log_game.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+            </ul>
+            </div>
+            <% end %>
 
           <div class="field">
             <%= f.label :game %>

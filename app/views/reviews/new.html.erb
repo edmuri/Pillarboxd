@@ -8,6 +8,7 @@
 
         <h2>Review <%= @game.title %></h2>
 
+        
         <%= form_with(model: [@game, @review], class: "auth-form", data: { turbo_frame: "_top" }) do |f| %>
           
           <% if @review.errors.any? %>

@@ -4,6 +4,7 @@ class LogGameController < ApplicationController
     end
 
     def create
+        @log_game = Log.new
         game_name = params[:log][:game]
         date_played = params[:log][:play_date]
         completed = params[:log][:is_completed]
@@ -20,10 +21,10 @@ class LogGameController < ApplicationController
         end
 
         if @errors.any?
-            respond_to do |format|
-                format.turbo_stream { render :new, status: :unprocessable_entity } 
-                format.html { render :new, status: :unprocessable_entity }
+            @errors.each do |err|
+                @log_game.errors.add(:base, err)
             end
+            render :new, status: :unprocessable_entity, formats: [:html]
             return
         end
 
@@ -33,18 +34,13 @@ class LogGameController < ApplicationController
             is_completed: completed
         )
 
-        if @log_game.save
-            respond_to do |format|
-            format.turbo_stream {
-             render turbo_stream: turbo_stream.remove("modal")
-            }
-            end
-        else
-             respond_to do |format|
-                format.turbo_stream { render :new, status: :unprocessable_entity } 
-                format.html { render :new, status: :unprocessable_entity }
+        respond_to do |format|
+            if @log_game.save
+                format.turbo_stream { render turbo_stream: turbo_stream.remove("modal") }
+                format.html { redirect_to logs_path }
+            else
+                render :new, status: :unprocessable_entity, formats: [:html]
             end
         end
-        
     end
 end
