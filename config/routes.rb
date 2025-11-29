@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "games/show"
   get "logs/index"
   get "logs/show"
+  get "lists/index"
 
   resources :games do
     resources :reviews, only: [:new, :create]
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   resources :publishers
   resources :logs
   resources :log_game
+  resources :lists
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
