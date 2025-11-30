@@ -109,6 +109,30 @@ def create_logs
         is_completed: true
     )
 
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    user = User.where("username LIKE ?", "emuri1").first
+    log_game = game.logs.create!(
+        user_id: user_id,
+        play_date: Date.new(2025, 11, 29),
+        is_completed: true
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    user = User.where("username LIKE ?", "jpenn").first
+    log_game = game.logs.create!(
+        user_id: user_id,
+        play_date: Date.new(2025, 11, 29),
+        is_completed: true
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    user = User.where("username LIKE ?", "btion").first
+    log_game = game.logs.create!(
+        user_id: user_id,
+        play_date: Date.new(2025, 11, 29),
+        is_completed: true
+    )
+
 end
 
 def create_reviews
@@ -205,12 +229,414 @@ def create_reviews
         review_text: "Meh"
     )
 
+    # Reviews for jpenn
     game = Game.where("title LIKE ?", "%Pokemon%").first
-    user = User.where("username LIKE ?", "emuri1").first
+    user = User.where("username LIKE ?", "jpenn").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 11, 29),
+        rating: 5,
+        review_text: "Totally awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Art Together%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 20),
+        rating: 1,
+        review_text: "Horrible!"
+    )
+
+    game = Game.where("title LIKE ?", "%Doofas%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 25),
+        rating: 2,
+        review_text: "Suuuuper Boring"
+    )
+
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Duet%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%FarmingCat%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 9, 29),
+        rating: 5,
+        review_text: "Love this game!"
+    )
+
+    game = Game.where("title LIKE ?", "%Gardener%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 5,
+        review_text: "Sooo good"
+    )
+
+    game = Game.where("title LIKE ?", "%Harmagedon%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 5,
+        review_text: "So creepy!"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
     review = game.reviews.create!(
         user: user,
         review_date: Date.new(2025, 8, 29),
         rating: 2,
-        review_text: "Meh",
+        review_text: "Meh"
     )
+
+    # Reviews for jcarm
+    game = Game.where("title LIKE ?", "%Pokemon%").first
+    user = User.where("username LIKE ?", "jcarm").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 11, 29),
+        rating: 5,
+        review_text: "Totally awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Art Together%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 20),
+        rating: 1,
+        review_text: "Horrible!"
+    )
+
+    game = Game.where("title LIKE ?", "%Doofas%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 25),
+        rating: 2,
+        review_text: "Suuuuper Boring"
+    )
+
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Duet%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%FarmingCat%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 9, 29),
+        rating: 5,
+        review_text: "Love this game!"
+    )
+
+    game = Game.where("title LIKE ?", "%Gardener%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 5,
+        review_text: "Sooo good"
+    )
+
+    game = Game.where("title LIKE ?", "%Harmagedon%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 5,
+        review_text: "So creepy!"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 2,
+        review_text: "Meh"
+    )
+
+    # Reviews for jbowma
+    game = Game.where("title LIKE ?", "%Pokemon%").first
+    user = User.where("username LIKE ?", "jbowma").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 11, 29),
+        rating: 5,
+        review_text: "Totally awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Art Together%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 20),
+        rating: 1,
+        review_text: "Horrible!"
+    )
+
+    game = Game.where("title LIKE ?", "%Doofas%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 25),
+        rating: 2,
+        review_text: "Suuuuper Boring"
+    )
+
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Duet%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%FarmingCat%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 9, 29),
+        rating: 5,
+        review_text: "Love this game!"
+    )
+
+    game = Game.where("title LIKE ?", "%Gardener%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 5,
+        review_text: "Sooo good"
+    )
+
+    game = Game.where("title LIKE ?", "%Harmagedon%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 5,
+        review_text: "So creepy!"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 2,
+        review_text: "Meh"
+    )
+
+    # Reviews for cvarn
+    game = Game.where("title LIKE ?", "%Pokemon%").first
+    user = User.where("username LIKE ?", "cvarn").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 11, 29),
+        rating: 5,
+        review_text: "Totally awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Art Together%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 20),
+        rating: 1,
+        review_text: "Horrible!"
+    )
+
+    game = Game.where("title LIKE ?", "%Doofas%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 25),
+        rating: 2,
+        review_text: "Suuuuper Boring"
+    )
+
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Duet%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%FarmingCat%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 9, 29),
+        rating: 5,
+        review_text: "Love this game!"
+    )
+
+    game = Game.where("title LIKE ?", "%Gardener%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 5,
+        review_text: "Sooo good"
+    )
+
+    game = Game.where("title LIKE ?", "%Harmagedon%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 5,
+        review_text: "So creepy!"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 2,
+        review_text: "Meh"
+    )
+
+    # Reviews for emuri1
+    game = Game.where("title LIKE ?", "%Pokemon%").first
+    user = User.where("username LIKE ?", "emuri1").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 11, 29),
+        rating: 5,
+        review_text: "Totally awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Art Together%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 20),
+        rating: 1,
+        review_text: "Horrible!"
+    )
+
+    game = Game.where("title LIKE ?", "%Doofas%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 25),
+        rating: 2,
+        review_text: "Suuuuper Boring"
+    )
+
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%Duet%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 4,
+        review_text: "Pretty Decent"
+    )
+
+    game = Game.where("title LIKE ?", "%FarmingCat%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 9, 29),
+        rating: 5,
+        review_text: "Love this game!"
+    )
+
+    game = Game.where("title LIKE ?", "%Gardener%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 29),
+        rating: 5,
+        review_text: "Sooo good"
+    )
+
+    game = Game.where("title LIKE ?", "%Harmagedon%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 10, 31),
+        rating: 5,
+        review_text: "So creepy!"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 2,
+        review_text: "Meh"
+    )
+
 end
