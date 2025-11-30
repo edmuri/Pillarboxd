@@ -1,15 +1,32 @@
-<h1><%= @user.username %>'s Profile</h1>
+<div class="lists-header">
+  <div class="header-content">
+    <h1 class = "page-title"><%= @user.username %>'s Profile</h1>
+    <p>Email: <%= @user.email %></p>
+  </div>
+</div>
 
-<p>Email: <%= @user.email %></p>
+<div class="main-content-container">
 
-<h3>Recent Logs:</h3>
-<% @recent_logs.each do |log| %>
-  <p><%= log.game.title %> — <%= log.play_date.to_date %></p>
-<% end %>
+<!-- LOGS & COVER ART -->
+  <div class="game-grid">
+    <h3 class="bold-text">Recent Logs:</h3>
+        <% @recent_logs.each do |log| %>
+            <div class="poster-frame">
+              <% if log.game.cover_url.present? && log.game.cover_url != "NO COVER" %>
+                <img src="<%= log.game.cover_url %>" alt="<%= log.game.title %>" loading="lazy">
+              <% else %>
+                <div class="no-image">
+                  Cover Art<br>Not Available
+                </div>
+            <% end %>
+            </div>
 
-<hr>
+            <div class="game-info">
+              <span class="title"><%= log.game.title %></span>
+            </div>
 
-<h3>Your Lists</h3>
+      <% end %>
+  </div>
 
 <% if @lists.any? %>
   <ul>
