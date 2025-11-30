@@ -106,10 +106,10 @@ while batches != 0
                 puts "Skipping Erotica title: #{g['name']}"
                 next
             end
-            if g["themes"].any? { |t| t["name"] == "Visual Novel" }
-                puts "Skipping Visual Novel title: #{g['name']}"
-                next
-            end
+        end
+        if g["genres"]&.any? { |t| t["name"] == "Visual Novel" }
+            # puts "Skipping Visual Novel title: #{g['name']}"
+            next
         end
         release = Time.at(0).to_datetime
         cover_url = "NO COVER"

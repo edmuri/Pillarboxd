@@ -1,8 +1,14 @@
-def seed_manually
-    ##########################################################################################
-    ### MANUALLY POPULATING DATA AFTER API TO HAVE PRELOADED DATA ###
-    ##########################################################################################
+#################################################################
+### MANUALLY POPULATING DATA AFTER API TO HAVE PRELOADED DATA ###
+#################################################################
 
+def seed_manually
+    create_users
+    create_logs
+    create_reviews
+end
+
+def create_users
     ############################################
     #############      USERS   #################
     ############################################
@@ -69,11 +75,13 @@ def seed_manually
         u.join_date = Time.current
     end
 
+end
+
+def create_logs
     ############################################
     #############      LOGS    #################
     ############################################
     game = Game.where("title LIKE ?", "%Pokemon%").first
-
     user = User.where("username LIKE ?", "emuri").first
     user_id = user.user_id
 
@@ -84,7 +92,6 @@ def seed_manually
     )
 
     game = Game.where("title LIKE ?", "%Sonic%").first
-
     user = User.where("username LIKE ?", "emuri").first
     user_id = user.user_id
 
@@ -94,6 +101,17 @@ def seed_manually
         is_completed: true
     )
 
+    game = Game.where("title LIKE ?", "%Antioma%").first
+    user = User.where("username LIKE ?", "emuri").first
+    log_game = game.logs.create!(
+        user_id: user_id,
+        play_date: Date.new(2025, 11, 29),
+        is_completed: true
+    )
+
+end
+
+def create_reviews
     ############################################
     #############    REVIEWS   #################
     ############################################
@@ -103,7 +121,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 11, 29),
         rating: 5,
-        review_text: "Totally awesome!",
+        review_text: "Totally awesome!"
     )
 
     game = Game.where("title LIKE ?", "%Antioma%").first
@@ -112,34 +130,34 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 29),
         rating: 4,
-        review_text: "Pretty Decent",
+        review_text: "Pretty Decent"
     )
 
-    game = Game.where("title LIKE ?", "%Chi%").first
+    game = Game.where("title LIKE ?", "%Art Together%").first
     user = User.where("username LIKE ?", "emuri").first
     review = game.reviews.create!(
         user: user,
         review_date: Date.new(2025, 10, 20),
         rating: 1,
-        review_text: "Horrible!",
+        review_text: "Horrible!"
     )
 
-        game = Game.where("title LIKE ?", "%Doofus%").first
+    game = Game.where("title LIKE ?", "%Doofas%").first
     user = User.where("username LIKE ?", "emuri").first
     review = game.reviews.create!(
         user: user,
         review_date: Date.new(2025, 10, 25),
         rating: 2,
-        review_text: "Suuuuper Boring",
+        review_text: "Suuuuper Boring"
     )
 
-        game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
     user = User.where("username LIKE ?", "emuri").first
     review = game.reviews.create!(
         user: user,
         review_date: Date.new(2025, 10, 31),
         rating: 4,
-        review_text: "Pretty Decent",
+        review_text: "Pretty Decent"
     )
 
     game = Game.where("title LIKE ?", "%Duet%").first
@@ -148,16 +166,16 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 29),
         rating: 4,
-        review_text: "Pretty Decent",
+        review_text: "Pretty Decent"
     )
 
     game = Game.where("title LIKE ?", "%FarmingCat%").first
     user = User.where("username LIKE ?", "emuri").first
     review = game.reviews.create!(
         user: user,
-        review_date: Date.new(2025, 09, 29),
+        review_date: Date.new(2025, 9, 29),
         rating: 5,
-        review_text: "Love this game!",
+        review_text: "Love this game!"
     )
 
     game = Game.where("title LIKE ?", "%Gardener%").first
@@ -166,7 +184,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 29),
         rating: 5,
-        review_text: "Sooo good",
+        review_text: "Sooo good"
     )
 
     game = Game.where("title LIKE ?", "%Harmagedon%").first
@@ -175,15 +193,51 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 31),
         rating: 5,
-        review_text: "So creepy!",
+        review_text: "So creepy!"
     )
 
     game = Game.where("title LIKE ?", "%Sonic%").first
     user = User.where("username LIKE ?", "emuri").first
     review = game.reviews.create!(
         user: user,
-        review_date: Date.new(2025, 08, 29),
+        review_date: Date.new(2025, 8, 29),
         rating: 2,
-        review_text: "Meh",
+        review_text: "Meh"
+    )
+
+    game = Game.where("title LIKE ?", "%Pokemon%").first
+    user = User.where("username LIKE ?", "emuri1").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 2,
+        review_text: "Meh"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
+    user = User.where("username LIKE ?", "emuri1").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 4,
+        review_text: "Awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
+    user = User.where("username LIKE ?", "emuri1").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 25),
+        rating: 5,
+        review_text: "Awesome!"
+    )
+
+    game = Game.where("title LIKE ?", "%Sonic%").first
+    user = User.where("username LIKE ?", "jpenn").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 8, 29),
+        rating: 4,
+        review_text: "Awesome!"
     )
 end
