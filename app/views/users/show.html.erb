@@ -28,15 +28,16 @@
       <% end %>
   </div>
 
-<% if @lists.any? %>
-  <ul>
-    <% @lists.each do |list| %>
-      <li>
-        <%= link_to list.title, list_path(list) %>
-        (<%= pluralize(list.list_entries.count, "game") %>)
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no lists yet.</p>
-<% end %>
+  <% if @lists.any? %>
+    <ul>
+      <% @lists.each do |list| %>
+        <li>
+          <%= link_to list.title, list_path(list) %>
+          (<%= pluralize(list.list_entries.count, "game") %>)
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no lists yet.</p>
+  <% end %>
+</div>
