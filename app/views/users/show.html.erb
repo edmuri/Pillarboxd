@@ -1,9 +1,18 @@
-<div class="lists-header">
-  <div class="header-content">
-    <h1 class = "page-title"><%= @user.username %>'s Profile</h1>
-    <p>Email: <%= @user.email %></p>
+<div class="user-profile">
+  <div class="profile-left">
+    <%= image_tag 'default-avatar.png', class: 'profile-picture', alt: @user.username %>
+
+    <div class="profile-info">
+      <h1 class="page-title"><%= @user.username %>'s Profile</h1>
+      <%# <p class="user-phrase"><%= @user.phrase %></p> %>
+    </div>
   </div>
+
+  <p class="email"><%= @user.email %></p>
 </div>
+
+
+
 
 <div class="main-content-container">
 
@@ -34,6 +43,7 @@
       <% end %>
   </div>
 
+  <!-- Use Lists -->
   <% if @lists.any? %>
     <ul>
       <% @lists.each do |list| %>
