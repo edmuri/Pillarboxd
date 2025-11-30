@@ -1,25 +1,27 @@
-<h1><%= @user.username %>'s Profile</h1>
+<div class="user-profile">
+  <h1><%= @user.username %>'s Profile</h1>
 
-<p>Email: <%= @user.email %></p>
+  <p>Email: <%= @user.email %></p>
 
-<h3>Recent Logs:</h3>
-<% @recent_logs.each do |log| %>
-  <p><%= log.game.title %> — <%= log.play_date.to_date %></p>
-<% end %>
+  <h3>Recent Logs:</h3>
+  <% @recent_logs.each do |log| %>
+    <p><%= log.game.title %> — <%= log.play_date.to_date %></p>
+  <% end %>
 
-<hr>
+  <hr>
 
-<h3>Your Lists</h3>
+  <h3>Your Lists</h3>
 
-<% if @lists.any? %>
-  <ul>
-    <% @lists.each do |list| %>
-      <li>
-        <%= link_to list.title, list_path(list) %>
-        (<%= pluralize(list.list_entries.count, "game") %>)
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>You have no lists yet.</p>
-<% end %>
+  <% if @lists.any? %>
+    <ul>
+      <% @lists.each do |list| %>
+        <li>
+          <%= link_to list.title, list_path(list) %>
+          (<%= pluralize(list.list_entries.count, "game") %>)
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no lists yet.</p>
+  <% end %>
+</div>
