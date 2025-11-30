@@ -7,10 +7,11 @@
 
 <div class="main-content-container">
 
-<!-- LOGS & COVER ART -->
+  <!-- LOGS & COVER ART -->
+  <h3 class="bold-text">Recent Logs:</h3>
   <div class="game-grid">
-    <h3 class="bold-text">Recent Logs:</h3>
         <% @recent_logs.each do |log| %>
+        <%= link_to game_path(log.game.game_id), class: "game-card" do %>
             <div class="poster-frame">
               <% if log.game.cover_url.present? && log.game.cover_url != "NO COVER" %>
                 <img src="<%= log.game.cover_url %>" alt="<%= log.game.title %>" loading="lazy">
@@ -19,12 +20,17 @@
                   Cover Art<br>Not Available
                 </div>
             <% end %>
+            <div class="hover-overlay">
+              <span class="play-overlay-text">
+              Played : <%= log.play_date.strftime("%b %d, %Y") %>
+              </span>
             </div>
+          </div>
 
             <div class="game-info">
-              <span class="title"><%= log.game.title %></span>
+            <span class="game-title"><%= log.game.title %></span>
             </div>
-
+          <% end %>
       <% end %>
   </div>
 
