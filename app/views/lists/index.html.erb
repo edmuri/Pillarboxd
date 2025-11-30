@@ -7,7 +7,8 @@
     </div>
 
     <div class="list-actions">
-      <%= link_to "New List", new_list_path, class: "btn btn-primary" %>
+      <%= link_to "New List", new_list_path, class: "btn btn-primary", data: {turbo_frame: "modal"}%>
+      <!-- <%= link_to "+ LOG", new_log_game_path, class:"nav-btn-signup", data: {turbo_frame: "modal"} %> -->
     </div>
   </div>
 </div>
