@@ -2,15 +2,9 @@
   <div class="header-content">
     <h1 class="page-title">Game Lists</h1>
 
-    <% if current_user.present? %>
-      <div class="user-stats">
-        <% if params[:query].present? %>
-          Found <strong><%= number_with_delimiter(@total_count) %></strong> results for "<em><%= params[:query] %></em>"
-        <% else %>
-          You have <strong><%= number_with_delimiter(@total_count) %></strong> lists.
-        <% end %>
-      </div>
-    <% end %>
+    <div class="user-stats">
+        Found <strong><%= number_with_delimiter(@total_count) %></strong> results
+    </div>
 
     <div class="list-actions">
       <%= link_to "New List", new_list_path, class: "btn btn-primary" %>

@@ -9,9 +9,18 @@ class ListsController < ApplicationController
     per_page = 20
     offset = (@page - 1) * per_page
 
-    @lists = current_user.lists.order(created_at: :desc)
-    @lists = @lists.where("title LIKE ?", "%#{params[:query]}%") if params[:query].present?
+    base_scope =
+      if current_user
+        # Show public lists + user’s own private lists
+        List.where("is_public = ? OR user_id = ?", true, current_user.id)
+      else
+        # Visitors only see public lists
+        List.where(is_public: true)
+      end
 
+    @lists = base_scope.order(created_at: :desc)
+    @lists = @lists.where("title LIKE ?", "%#{params[:query]}%") if params[:query].present?
+    
     @total_count = @lists.count
     @total_pages = (@total_count.to_f / per_page).ceil
     @more_exists = @page < @total_pages
