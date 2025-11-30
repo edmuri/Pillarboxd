@@ -19,7 +19,7 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list_items = @list.list_items.includes(:game)
+    @list_entries = @list.list_entries.includes(:game)
   end
 
   def new
@@ -29,7 +29,7 @@ class ListsController < ApplicationController
   def create
     @list = current_user.lists.build(list_params)
     if @list.save
-      redirect_to @list, notice: "List created successfully."
+      redirect_to lists_path, notice: "List created successfully."
     else
       render :new
     end
@@ -39,7 +39,7 @@ class ListsController < ApplicationController
 
   def update
     if @list.update(list_params)
-      redirect_to @list, notice: "List updated successfully."
+      redirect_to lists_path, notice: "List updated successfully."
     else
       render :edit
     end

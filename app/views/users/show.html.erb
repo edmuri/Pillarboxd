@@ -4,7 +4,7 @@
 
 <h3>Recent Logs:</h3>
 <% @recent_logs.each do |log| %>
-  <p><%= log.game.title %> — <%= log.created_at.to_date %></p>
+  <p><%= log.game.title %> — <%= log.play_date.to_date %></p>
 <% end %>
 
 <hr>
@@ -15,8 +15,8 @@
   <ul>
     <% @lists.each do |list| %>
       <li>
-        <%= link_to list.name, list_path(list) %>
-        (<%= pluralize(list.list_items.count, "game") %>)
+        <%= link_to list.title, list_path(list) %>
+        (<%= pluralize(list.list_entries.count, "game") %>)
       </li>
     <% end %>
   </ul>

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :logs
   resources :log_game
   resources :lists do
-    resources :list_items, only: [:create, :destroy]
+    resources :list_entries, only: [:create, :destroy]
   end
 
   resources :users, only: [:show]

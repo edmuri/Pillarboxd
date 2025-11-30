@@ -1,4 +1,4 @@
-class ListItemsController < ApplicationController
+class ListEntryController < ApplicationController
   before_action :set_list
 
   def create
@@ -29,6 +29,6 @@ class ListItemsController < ApplicationController
   end
 
   def list_item_params
-    params.require(:list_item).permit(:game_id)
+    params.require(:list_entry).permit(:game_id)
   end
 end

@@ -1,7 +1,7 @@
 class List < ApplicationRecord
   belongs_to :user
-  has_many :list_items, dependent: :destroy
-  has_many :games, through: :list_items
+  has_many :list_entries, class_name: "ListEntry", dependent: :destroy
+  has_many :games, through: :list_entries
 
-  validates :name, presence: true
+  validates :title, presence: true
 end
