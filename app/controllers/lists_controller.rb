@@ -50,6 +50,7 @@ class ListsController < ApplicationController
       redirect_to lists_path, notice: "List deleted successfully."
     else
       redirect_to @list, notice: "Failed to delete list."
+    end
   end
 
   private

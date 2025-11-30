@@ -27,27 +27,27 @@ class GamesController < ApplicationController
   end
 
   def show
-    # Find the game and eager load associations to prevent N+1 queries
     @game = Game.includes(:developers, :publishers, :genres, :platforms).find(params[:id])
     
     @sort_type = params[:sort] || 'newest'
     
     @page = params[:page].to_i
     @page = 1 if @page <= 0
-    per_page = 10
+    per_page = 15
     offset = (@page - 1) * per_page
 
     base_query = @game.reviews.includes(:user).where.not(review_text: [nil, ""])
 
     sorted_query = case @sort_type
-                  when 'highest' then base_query.order(rating: :desc)
-                  when 'lowest'  then base_query.order(rating: :asc)
-                  else base_query.order(review_date: :desc)
-                  end
+                   when 'highest' then base_query.order(rating: :desc)
+                   when 'lowest'  then base_query.order(rating: :asc)
+                   else base_query.order(review_date: :desc)
+                   end
 
     @reviews = sorted_query.offset(offset).limit(per_page)
-
+    
     total_reviews = base_query.count
-    @more_reviews_exist = total_reviews > (@page * per_page)
+    @total_pages = (total_reviews.to_f / per_page).ceil
+    @more_reviews_exist = @page < @total_pages
   end
 end

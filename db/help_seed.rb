@@ -211,33 +211,6 @@ def create_reviews
         user: user,
         review_date: Date.new(2025, 8, 29),
         rating: 2,
-        review_text: "Meh"
-    )
-
-    game = Game.where("title LIKE ?", "%Sonic%").first
-    user = User.where("username LIKE ?", "emuri1").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2025, 8, 29),
-        rating: 4,
-        review_text: "Awesome!"
-    )
-
-    game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
-    user = User.where("username LIKE ?", "emuri1").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2025, 8, 25),
-        rating: 5,
-        review_text: "Awesome!"
-    )
-
-    game = Game.where("title LIKE ?", "%Sonic%").first
-    user = User.where("username LIKE ?", "jpenn").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2025, 8, 29),
-        rating: 4,
-        review_text: "Awesome!"
+        review_text: "Meh",
     )
 end
