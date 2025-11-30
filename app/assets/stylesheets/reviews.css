@@ -14,7 +14,7 @@
 /* STAR STYLES */
 .star-rating label {
   font-size: 2rem; 
-  color: #456;     
+  color: rgba(228, 245, 43, 0.4);     
   cursor: pointer;
   transition: color 0.2s;
 }
@@ -22,16 +22,16 @@
 /* HOVER & CHECKED STATES */
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-  color: #00e054;
+  color: #e4f52b;
 }
 
 .star-rating input:checked ~ label {
-  color: #00e054;
+  color: #e4f52b;
 }
 
 .star-rating input:checked + label:hover,
 .star-rating input:checked ~ label:hover,
 .star-rating label:hover ~ input:checked ~ label,
 .star-rating input:checked ~ label:hover ~ label {
-  color: #00e054;
+  color: #e4f52b;
 }
