@@ -103,7 +103,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 11, 29),
         rating: 5,
-        review_text: "Totally awesome!",
+        review_text: "Totally awesome!"
     )
 
     game = Game.where("title LIKE ?", "%Antioma%").first
@@ -112,7 +112,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 29),
         rating: 4,
-        review_text: "Pretty Decent",
+        review_text: "Pretty Decent"
     )
 
     game = Game.where("title LIKE ?", "%Chi%").first
@@ -121,7 +121,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 20),
         rating: 1,
-        review_text: "Horrible!",
+        review_text: "Horrible!"
     )
 
         game = Game.where("title LIKE ?", "%Doofus%").first
@@ -130,7 +130,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 25),
         rating: 2,
-        review_text: "Suuuuper Boring",
+        review_text: "Suuuuper Boring"
     )
 
         game = Game.where("title LIKE ?", "%Cuckoo Castle%").first
@@ -139,7 +139,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 31),
         rating: 4,
-        review_text: "Pretty Decent",
+        review_text: "Pretty Decent"
     )
 
     game = Game.where("title LIKE ?", "%Duet%").first
@@ -148,7 +148,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 29),
         rating: 4,
-        review_text: "Pretty Decent",
+        review_text: "Pretty Decent"
     )
 
     game = Game.where("title LIKE ?", "%FarmingCat%").first
@@ -157,7 +157,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 09, 29),
         rating: 5,
-        review_text: "Love this game!",
+        review_text: "Love this game!"
     )
 
     game = Game.where("title LIKE ?", "%Gardener%").first
@@ -166,7 +166,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 29),
         rating: 5,
-        review_text: "Sooo good",
+        review_text: "Sooo good"
     )
 
     game = Game.where("title LIKE ?", "%Harmagedon%").first
@@ -175,7 +175,7 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 10, 31),
         rating: 5,
-        review_text: "So creepy!",
+        review_text: "So creepy!"
     )
 
     game = Game.where("title LIKE ?", "%Sonic%").first
@@ -184,6 +184,6 @@ def seed_manually
         user: user,
         review_date: Date.new(2025, 08, 29),
         rating: 2,
-        review_text: "Meh",
+        review_text: "Meh"
     )
 end
