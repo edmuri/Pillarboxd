@@ -1,25 +1,47 @@
 .user-profile {
+    display: flex;
+    justify-content: space-between; /* username left, email right */
+    align-items: center;
     background-color: #14181c;
     color: #9ab;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    padding: 40px 20px;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 40px 20px;
-    text-align: center;
+    gap: 20px;
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .profile-picture {
-    width: 120px;
-    height: 120px;
+    width: 160px;   /* bigger picture */
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    margin: 0;
 }
 
 .user-phrase {
     font-style: italic;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     color: #e09916;
-    margin-top:10px;
+    margin-top: 10px;
+}
 
+.email {
+    font-size: 1em;
+    color: #9ab;
+    white-space: nowrap;
 }

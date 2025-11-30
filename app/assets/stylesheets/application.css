@@ -1,3 +1,8 @@
+/*
+ *= require_self
+ *= require profile
+ */
+
 .scrollable {
   overflow-y: auto;
 }
