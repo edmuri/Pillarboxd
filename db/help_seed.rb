@@ -779,7 +779,7 @@ if you do that, you will get so many players and so much more money etc."
     game = Game.where("title LIKE ?", "%Hole in Won%").first
     review = game.reviews.create!(
         user: user,
-        review_date: Date.new(2020, 2, 3),
+        review_date: Date.new(2025, 2, 3),
         rating: 5,
         review_text: "Was really fun to play! There were many levels to the games!"
     )
@@ -787,9 +787,41 @@ if you do that, you will get so many players and so much more money etc."
     game = Game.where("title LIKE ?", "%Cats & Cakes: The Card Game%").first
     review = game.reviews.create!(
         user: user,
-        review_date: Date.new(2020, 4, 16),
+        review_date: Date.new(2025, 4, 16),
         rating: 5,
         review_text: "Really liked baking and the cats in the game!"
+    )
+
+    game = Game.where("title LIKE ?", "%Numbskull%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 5, 9),
+        rating: 3,
+        review_text: "Very unique theme, but game was as expected"
+    )
+
+    game = Game.where("title LIKE ?", "%Super Obama World%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 7, 21),
+        rating: 3,
+        review_text: "Like Super Mario but with Obama =)"
+    )
+
+    game = Game.where("title LIKE ?", "%Kingdom Hearts HD 2.8 Final Chapter %").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 3, 28),
+        rating: 5,
+        review_text: "Was really fun to play! Square Enix never dissapoints"
+    )
+
+    game = Game.where("title LIKE ?", "%100 Barcelona Cats %").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2025, 3, 28),
+        rating: 5,
+        review_text: "My favorite, cats!"
     )
 
 end
