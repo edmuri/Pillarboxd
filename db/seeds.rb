@@ -102,14 +102,10 @@ while batches != 0
     offset += limit
     games.each do |g|
         if g["themes"].present?
-            if g["themes"].any? { |t| t["name"] == "Erotica" }
+            if g["themes"].any? { |t| t["name"] == "Erotic" }
                 puts "Skipping Erotica title: #{g['name']}"
                 next
             end
-        end
-        if g["genres"]&.any? { |t| t["name"] == "Visual Novel" }
-            # puts "Skipping Visual Novel title: #{g['name']}"
-            next
         end
         release = Time.at(0).to_datetime
         cover_url = "NO COVER"
