@@ -768,12 +768,5 @@ if you do that, you will get so many players and so much more money etc."
         review_text: "Its terrible i have contacted developers with a problems and they didnt do anything. its just broken. the worst game ever"
     )
 
-    game = Game.where("title LIKE ?", "%Another Way of Gettin' Paid%").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2021, 5, 3),
-        rating: 2,
-        review_text: "it's aight"
-    )
 
 end
