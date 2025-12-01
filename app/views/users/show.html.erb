@@ -1,59 +1,81 @@
-<div class="user-profile">
+<div class="user-profile-header">
   <div class="profile-left">
-    <%= image_tag 'default-avatar.png', class: 'profile-picture', alt: @user.username %>
+    <div class="avatar-frame">
+      <%= image_tag 'default-avatar.png', class: 'profile-picture', alt: @user.username %>
+    </div>
 
     <div class="profile-info">
-      <h1 class="page-title"><%= @user.username %>'s Profile</h1>
-      <%# <p class="user-phrase"><%= @user.phrase %></p> %>
+      <h1 class="profile-username"><%= @user.username %></h1>
+      <% if current_user == @user %>
+        <%= link_to "Edit Profile", edit_user_registration_path, class: "btn-tiny-gray" %>
+      <% end %>
     </div>
   </div>
 
-  <p class="email"><%= @user.email %></p>
+  <div class="profile-stats">
+    <div class="stat-box">
+      <span class="stat-number"><%= @user.logs.count %></span>
+      <span class="stat-label">Logs</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number"><%= @user.lists.count %></span>
+      <span class="stat-label">Lists</span>
+    </div>
+  </div>
 </div>
-
-
-
 
 <div class="main-content-container">
 
-  <!-- LOGS & COVER ART -->
-  <h3 class="bold-text">Recent Logs:</h3>
-  <div class="game-grid">
-        <% @recent_logs.each do |log| %>
-        <%= link_to game_path(log.game.game_id), class: "game-card" do %>
-            <div class="poster-frame">
-              <% if log.game.cover_url.present? && log.game.cover_url != "NO COVER" %>
-                <img src="<%= log.game.cover_url %>" alt="<%= log.game.title %>" loading="lazy">
-              <% else %>
-                <div class="no-image">
-                  Cover Art<br>Not Available
-                </div>
-            <% end %>
-            <div class="hover-overlay">
-              <span class="play-overlay-text">
-              Played : <%= log.play_date.strftime("%b %d, %Y") %>
-              </span>
-            </div>
-          </div>
-
-            <div class="game-info">
-            <span class="game-title"><%= log.game.title %></span>
-            </div>
-          <% end %>
-      <% end %>
+  <div class="section-header">
+    <h4 class="section-label">Recent Activity</h4>
+    <%= link_to "All Logs", user_logs_path(@user), class: "see-all-link" %>
   </div>
 
-  <!-- Use Lists -->
-  <% if @lists.any? %>
-    <ul>
-      <% @lists.each do |list| %>
-        <li>
-          <%= link_to list.title, list_path(list) %>
-          (<%= pluralize(list.list_entries.count, "game") %>)
-        </li>
+  <div class="game-grid">
+    <% @recent_logs.each do |log| %>
+      <%= link_to game_path(log.game.game_id), class: "game-card" do %>
+        <div class="poster-frame">
+          <img src="<%= log.game.cover_url %>" alt="<%= log.game.title %>" loading="lazy">
+          
+          <div class="hover-overlay">
+            <span class="play-overlay-text">
+              Played<br><%= log.play_date.strftime("%b %d") %>
+            </span>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    <% end %>
+  </div>
+
+  <div class="section-header" style="margin-top: 50px;">
+    <h4 class="section-label">Lists</h4>
+    <%= link_to "All Lists", user_lists_path(@user), class: "see-all-link" %>
+  </div>
+
+  <% if @lists.any? %>
+    <div class="lists-grid">
+      <% @lists.each do |list| %>
+        <%= link_to list_path(list), class: "list-card" do %>
+          <div class="list-stack">
+            <% list.games.limit(3).each_with_index do |game, i| %>
+              <div class="stack-cover cover-<%= i %>">
+                <img src="<%= game.cover_url %>">
+              </div>
+            <% end %>
+            <% if list.games.empty? %>
+              <div class="empty-list-placeholder">Empty</div>
+            <% end %>
+          </div>
+          
+          <div class="list-info">
+            <span class="list-title"><%= list.title %></span>
+            <span class="list-count"><%= list.list_entries.count %> games</span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   <% else %>
-    <p>You have no lists yet.</p>
+    <p style="color: #678; font-style: italic;">No lists created yet.</p>
   <% end %>
+
 </div>

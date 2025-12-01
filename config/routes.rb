@@ -8,20 +8,24 @@ Rails.application.routes.draw do
   get "lists/index"
   get "/users/:id/lists", to: "users#lists", as: :user_lists
 
-
   resources :games do
     resources :reviews, only: [:new, :create]
   end
+
   resources :developers
   resources :publishers
   resources :logs
   resources :log_game
+
   resources :lists do
     resources :list_entries, only: [:create, :destroy]
     post 'add_game', on: :member
   end
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :logs, only: [:index] 
+    resources :lists, only: [:index]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

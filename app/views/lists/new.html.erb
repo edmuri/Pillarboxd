@@ -3,49 +3,52 @@
     
     <div class="modal-content" onclick="event.stopPropagation()">
       
-      <div class="log-container">
+      <div class="auth-container">
         <button type="button" class="close-modal-btn" onclick="document.getElementById('modal').removeAttribute('src'); document.getElementById('modal').innerHTML = ''">
           &times;
         </button>
 
-        <h1>New List</h1>
+        <h2>Create a New List</h2>
 
         <% if @list.errors.any? %>
-          <div class="errors">
+          <div class="form-errors" style="color: #ff5f5f; margin-bottom: 20px; font-size: 0.9rem;">
             <% @list.errors.full_messages.each do |msg| %>
-              <p><%= msg %></p>
+              <div>• <%= msg %></div>
             <% end %>
           </div>
         <% end %>
 
-        <%= form_with model: @list, local: true do |f| %>
+        <%= form_with model: @list, local: true, class: "auth-form" do |f| %>
+          
           <div class="field">
-            <%= f.label :title %><br>
-            <%= f.text_field :title, required: true %>
+            <%= f.label :title %>
+            <%= f.text_field :title, required: true, class: "auth-input", placeholder: "e.g. Top 10 Horror Games" %>
           </div>
 
           <div class="field">
-            <%= f.label :description %><br>
-            <%= f.text_area :description %>
+            <%= f.label :description %>
+            <%= f.text_area :description, rows: 4, class: "auth-input", placeholder: "What is this list about?" %>
           </div>
 
-          <div>
-            <%= f.label :is_public %>
-            <%= f.check_box :is_public %>
-          </div>
+          <div style="display: flex; gap: 30px; margin-bottom: 25px;">
+            
+            <div class="remember-me-row" style="margin-bottom: 0; width: auto;">
+              <%= f.check_box :is_public, class: "custom-checkbox" %>
+              <%= f.label :is_public, "Public List", class: "custom-label" %>
+            </div>
 
-          <div>
-            <%= f.label :is_backlog %>
-            <%= f.check_box :is_backlog %>
-          </div>
+            <div class="remember-me-row" style="margin-bottom: 0; width: auto;">
+              <%= f.check_box :is_backlog, class: "custom-checkbox" %>
+              <%= f.label :is_backlog, "Backlog", class: "custom-label" %>
+            </div>
+
+            </div>
 
           <div class="actions">
-            <%= f.submit "Create List", class: "log-btn",
-              data: { turbo: false } %>
+            <%= f.submit "Create List", class: "auth-btn", data: { turbo: false } %>
           </div>
-        <% end %>
 
-        <%= link_to "Back to Lists", lists_path %>
+        <% end %>
 
       </div>
 
