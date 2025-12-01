@@ -768,5 +768,28 @@ if you do that, you will get so many players and so much more money etc."
         review_text: "Its terrible i have contacted developers with a problems and they didnt do anything. its just broken. the worst game ever"
     )
 
+    game = Game.where("title LIKE ?", "%Her Name Was Fire%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2020, 6, 3),
+        rating: 3,
+        review_text: "It was not bad"
+    )
+
+    game = Game.where("title LIKE ?", "%Hole in Won%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2020, 2, 3),
+        rating: 5,
+        review_text: "Was really fun to play! There were many levels to the games!"
+    )
+
+    game = Game.where("title LIKE ?", "%Cats & Cakes: The Card Game%").first
+    review = game.reviews.create!(
+        user: user,
+        review_date: Date.new(2020, 4, 16),
+        rating: 5,
+        review_text: "Really liked baking and the cats in the game!"
+    )
 
 end
