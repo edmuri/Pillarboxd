@@ -1,0 +1,67 @@
+<%= turbo_frame_tag dom_id(@list) do %>
+  <div class="logs-container">
+    <div class="header-section">
+      <div class="header-left">
+        <h1 class="page-title"><%= @list.title %></h1>
+        <p class="log-stats">
+          <% if @list.description.present? %>
+            <h2><%= @list.description %></h2>
+            <br>
+          <% end %>
+          <br>
+          <h3>You have <strong><%= number_with_delimiter(@list_entries.count) %></strong> games in this list.</h3>
+        </p>
+      </div>
+
+      <div class="header-right">
+        <%= form_with url: list_path(@list), method: :get, local: true, class: "search-form" do |form| %>
+          <%= form.text_field :query, 
+            value: params[:query], 
+            placeholder: "Search for...", 
+            class: "search-input" 
+          %>
+          <%= form.submit "Filter", class: "search-button" %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @list_entries.any? %> 
+      <div class="game-grid">
+        <% @list_entries.each do |entry| %>
+          <% game = entry.game %>
+
+          <%= link_to game_path(game.game_id), data: { turbo: false }, class: "game-card" do %>
+            <div class="poster-frame">
+              <% if game.cover_url.present? && game.cover_url != "NO COVER" %>
+                <img src="<%= game.cover_url %>" alt="<%= game.title %>" loading="lazy">
+              <% else %>
+                <div class="no-image">
+                  Cover Art<br>Not Available
+                </div>
+              <% end %>
+              <div class="hover-overlay">
+                  <span class="play-overlay-text">
+                     Go to <%= game.title %>
+                  </span>
+               </div>
+            </div>
+
+            <div class="game-info">
+              <span class="title"><%= game.title %></span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+      <div class="pagination" style="text-align:center;margin-top:30px;">
+        <%# <%= paginate @list_entries %>
+      </div>
+
+    <% else %>
+      <div style="text-align: center; margin-top: 50px; color: #678;">
+        <h2>No games added to this list yet.</h2>
+        <%= link_to "Add Games", "#", style: "color: #00e054;" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

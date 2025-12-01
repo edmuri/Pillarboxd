@@ -17,4 +17,7 @@ class Game < ApplicationRecord
   
   has_many :reviews
   has_many :logs
+
+  has_many :list_entries
+  has_many :lists, through: :list_entries
 end

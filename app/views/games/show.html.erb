@@ -41,7 +41,32 @@
                 data: { turbo_frame: "modal" } %>
           <% end %>
 
-          <button class="btn-action btn-gray">Add to List</button>
+          <div class="nav-dropdown">
+            <div class="dropdown-trigger btn-action btn-gray">
+              Add to List
+              <span class="dropdown-arrow">▼</span>
+            </div>
+
+            <div class="dropdown-menu">
+              <% if current_user.lists.any? %>
+                <% current_user.lists.each do |list| %>
+                  
+                  <%= form_with url: add_game_list_path(list), method: :post, data: { turbo: false }, class: "dropdown-form" do %>
+                    <%= hidden_field_tag :game_id, @game.game_id %>
+                    
+                    <button type="submit" class="dropdown-item">
+                      <%= list.title %>
+                    </button>
+                  <% end %>
+
+                <% end %>
+              <% else %>
+                <div class="dropdown-item disabled">No lists yet</div>
+                <div class="dropdown-divider"></div>
+                <%= link_to "Create New List", new_list_path, class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </div>
 
         <% else %>
           <%= link_to "Sign in to Log", new_user_session_path, class: "btn-action btn-gray", data: { turbo_frame: "modal" } %>

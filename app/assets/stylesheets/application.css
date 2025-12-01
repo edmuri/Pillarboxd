@@ -512,3 +512,62 @@ body {
 .dropdown-item.danger-text:hover {
   color: #ff5f5f;
 }
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: 8px 15px; 
+  margin-bottom: 0; 
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  
+  height: auto; 
+}
+
+.btn-gray { 
+  background-color: #456; 
+  color: #dde; 
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2); 
+}
+
+.btn-gray:hover { 
+  background-color: #567; 
+  color: #fff; 
+}
+
+.btn-action .dropdown-arrow {
+  color: #dde; 
+}
+
+.dropdown-form {
+  margin: 0;
+  padding: 0;
+}
+
+/* Make the button element look exactly like a dropdown link item */
+.dropdown-menu .dropdown-item {
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-item.disabled {
+  color: #667788; 
+  cursor: default;
+  background-color: transparent;
+}
+
+.dropdown-item.disabled:hover {
+  background-color: transparent; 
+  color: #667788;
+}

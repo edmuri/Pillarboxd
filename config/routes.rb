@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :log_game
   resources :lists do
     resources :list_entries, only: [:create, :destroy]
+    post 'add_game', on: :member
   end
 
   resources :users, only: [:show]

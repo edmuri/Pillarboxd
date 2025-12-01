@@ -29,6 +29,24 @@ class ListsController < ApplicationController
 
   def show
     @list_entries = @list.list_entries.includes(:game)
+    if params[:query].present?
+      search_query = "%#{params[:query].downcase}%"
+      @list_entries = @list_entries.joins(:game)
+                                  .where("LOWER(games.title) LIKE ?", search_query)
+    end
+  end
+
+  def add_game
+    list = List.find(params[:id])
+    game = Game.find(params[:game_id])
+
+    if list.games.exists?(game_id: game.game_id)
+      redirect_to game_path(game), notice: "Game is already in this list."
+      return
+    end
+
+    list.games << game
+    redirect_to game_path(game), notice: "Game added to #{list.title}."
   end
 
   def new

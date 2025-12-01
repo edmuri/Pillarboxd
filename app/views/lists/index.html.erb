@@ -28,7 +28,11 @@
       <tbody>
         <% @lists.each do |list| %>
           <tr>
-            <td><%= link_to list.title, list_path(list), class: "table-link" %></td>
+            <td><%= link_to list.title, 
+                    list_path(list),
+                    data: { turbo_frame: "_top" }, 
+                    class: "table-link" %>
+            </td>
             <td><%= truncate(list.description, length: 50) %></td>
             <td class="text-center"><%= list.list_entries.size %></td>
             <td class="text-center"><%= list.created_at&.strftime("%b %d, %Y") || "-" %></td>
