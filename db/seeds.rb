@@ -103,7 +103,12 @@ while batches != 0
     games.each do |g|
         if g["themes"].present?
             if g["themes"].any? { |t| t["name"] == "Erotic" }
-                puts "Skipping Erotica title: #{g['name']}"
+                # puts "Skipping Erotica title: #{g['name']}"
+                next
+            end
+        end
+        if g["name"].present?
+            if g["name"] == "Space Misadventures DX"
                 next
             end
         end
