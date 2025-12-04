@@ -20,12 +20,43 @@
 </div>
 
 ## What is Pillarboxd?
-Pillarboxd is a fullstack application made in Ruby on Rails to showcase complex database relationships amongst video games.  
-Our team decided to make a video game reviewing and logging application that can be used to show your friends what games you have been playing!
+Recently played a game but not sure what to explore next? Check out **Pillarboxd**!  
+Pillarboxd is a full-stack Ruby on Rails application that lets you log, track, and review the video games you’ve played.  
+With Twitch API integration, our MySQL database is automatically populated with the latest game titles—ready for you to discover and log!  
 
----
+
+## Features
+- Game Logging: Keep a detailed record of every game you’ve played
+- Reviews: Add ratings and write reviews for your library
+- Custom Lists: Curate collections of your favorite games
+- User Personalization: Tailor your profile and preferences
+- Advanced Filtering: Browse games by publisher, developer, genre, and more
+- Quick Redirects: Jump directly to official game or studio pages
+
+
+## UI
+
+**Front page** - Discover the highest-rated games, explore recent releases, and stay updated on what’s coming out next!
+
+<div align="center">
+    <img src="./public/Demo1.gif">
+</div>
+
+**Profile page** - Quickly access all your logged games and personalized lists in one place!
+
+<div align="center">
+    <img src="./public/Demo2.gif">
+</div>
+
+
+
 
 ## Running the project
+
+```bash
+git clone https://github.com/edmuri/Pillarboxd
+cd Pillarboxd
+```
 
 Install [docker compose](https://docs.docker.com/compose/install/)
 

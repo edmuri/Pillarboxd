@@ -703,14 +703,14 @@ def create_reviews
     #     review_text: "The Dev's need to patch this game and fix the freezing issue during the game play Needed Attention and URGENT UPDATE not sit and eat donuts like homer simpson reading this and saying DOH with a crayon up your nose"
     # )
 
-    game = Game.where("title LIKE ?", "%A Gummy's Life%").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2025, 4, 12),
-        rating: 5,
-        review_text: "Make the game free and add Skins to pay (i wouldve pay and a lot of other players im sure)
-if you do that, you will get so many players and so much more money etc."
-    )
+#     game = Game.where("title LIKE ?", "%A Gummy's Life%").first
+#     review = game.reviews.create!(
+#         user: user,
+#         review_date: Date.new(2025, 4, 12),
+#         rating: 5,
+#         review_text: "Make the game free and add Skins to pay (i wouldve pay and a lot of other players im sure)
+# if you do that, you will get so many players and so much more money etc."
+#     )
 
     game = Game.where("title LIKE ?", "%A Week of Garfield: Garfield no Isshukan%").first
     review = game.reviews.create!(
