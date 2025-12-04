@@ -663,13 +663,13 @@ def create_reviews
         review_text: "old-school and nostalgic"
     )
 
-    game = Game.where("title LIKE ?", "%Aaero%").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2022, 1, 7),
-        rating: 4,
-        review_text: "god this game looks visually amazing and the game is not easy lol"
-    )
+    # game = Game.where("title LIKE ?", "%Aaero%").first
+    # review = game.reviews.create!(
+    #     user: user,
+    #     review_date: Date.new(2022, 1, 7),
+    #     rating: 4,
+    #     review_text: "god this game looks visually amazing and the game is not easy lol"
+    # )
 
     game = Game.where("title LIKE ?", "%A Bright Light in the Middle of the Ocean%").first
     review = game.reviews.create!(
@@ -695,13 +695,13 @@ def create_reviews
         review_text: "soooo spooky"
     )
 
-    game = Game.where("title LIKE ?", "%5-in-1 Pack: Monument Builders - Destination USA %").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2022, 3, 29),
-        rating: 1,
-        review_text: "The Dev's need to patch this game and fix the freezing issue during the game play Needed Attention and URGENT UPDATE not sit and eat donuts like homer simpson reading this and saying DOH with a crayon up your nose"
-    )
+    # game = Game.where("title LIKE ?", "%5-in-1 Pack: Monument Builders - Destination USA %").first
+    # review = game.reviews.create!(
+    #     user: user,
+    #     review_date: Date.new(2022, 3, 29),
+    #     rating: 1,
+    #     review_text: "The Dev's need to patch this game and fix the freezing issue during the game play Needed Attention and URGENT UPDATE not sit and eat donuts like homer simpson reading this and saying DOH with a crayon up your nose"
+    # )
 
     game = Game.where("title LIKE ?", "%A Gummy's Life%").first
     review = game.reviews.create!(
@@ -752,13 +752,13 @@ if you do that, you will get so many players and so much more money etc."
         review_text: "it's aight"
     )
 
-    game = Game.where("title LIKE ?", "%Ace wo Nerae!%").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2024, 2, 23),
-        rating: 1,
-        review_text: "For all the sake of humanity, do not play Aidyn Chronicles."
-    )
+    # game = Game.where("title LIKE ?", "%Ace wo Nerae!%").first
+    # review = game.reviews.create!(
+    #     user: user,
+    #     review_date: Date.new(2024, 2, 23),
+    #     rating: 1,
+    #     review_text: "For all the sake of humanity, do not play Aidyn Chronicles."
+    # )
 
     game = Game.where("title LIKE ?", "%Alive 2 Survive%").first
     review = game.reviews.create!(
@@ -816,12 +816,12 @@ if you do that, you will get so many players and so much more money etc."
         review_text: "Was really fun to play! Square Enix never dissapoints"
     )
 
-    game = Game.where("title LIKE ?", "%100 Barcelona Cats %").first
-    review = game.reviews.create!(
-        user: user,
-        review_date: Date.new(2025, 3, 28),
-        rating: 5,
-        review_text: "My favorite, cats!"
-    )
+    # game = Game.where("title LIKE ?", "%100 Barcelona Cats%").first
+    # review = game.reviews.create!(
+    #     user: user,
+    #     review_date: Date.new(2025, 3, 28),
+    #     rating: 5,
+    #     review_text: "My favorite, cats!"
+    # )
 
 end

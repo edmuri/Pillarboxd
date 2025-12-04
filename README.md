@@ -1,11 +1,31 @@
-# Pillarboxd
+<img width=1000 height=200 src="./public/icon_full.svg">  
 
-### Deadlines
-- Nov 4th - Title of the project has to be submitted onto the sheet
-- Nov 18th - Analysis and ER Diagram + lis tof technologies has to be reported
-- Dec 1st - Final Presentation due(3-4 minute recording, ER Diagram, Relational Schema)
+---
 
-### Running the project
+<div align="center">
+
+![Rails](https://img.shields.io/badge/rails-%23CC0000.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+![Ruby](https://img.shields.io/badge/ruby-%23CC342D.svg?style=for-the-badge&logo=ruby&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/css-%23663399.svg?style=for-the-badge&logo=css&logoColor=white)
+
+</div>
+
+---
+
+<div align="center">
+    <img src="./public/Landing.png">
+</div>
+
+## What is Pillarboxd?
+Pillarboxd is a fullstack application made in Ruby on Rails to showcase complex database relationships amongst video games.  
+Our team decided to make a video game reviewing and logging application that can be used to show your friends what games you have been playing!
+
+---
+
+## Running the project
 
 Install [docker compose](https://docs.docker.com/compose/install/)
 
@@ -30,3 +50,11 @@ Core volumes have changed and need to delete cache for new container builds
 docker-compose down --volumes
 # Repeat steps above for install
 ```
+
+## Contributors
+[![Bogdan](https://img.shields.io/badge/Bogdan_Catana-FFA500?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bogdicatana)
+[![Claudia](https://img.shields.io/badge/Claudia_Varnas-1DB954?style=for-the-badge&logo=github&logoColor=white)](https://github.com/cl-py)
+[![Eduardo](https://img.shields.io/badge/Eduardo_Murillo-313030?style=for-the-badge&logo=github&logoColor=white)](https://github.com/edmuri)
+[![Martin](https://img.shields.io/badge/Martin_Gawron-53b2c2?style=for-the-badge&logo=github&logoColor=white)](https://github.com/martingaw11)
+[![Mauricio](https://img.shields.io/badge/Mauricio_Alvarez-c97d94?style=for-the-badge&logo=github&logoColor=white)](https://github.com/itsperi)
+[![Vidhi](https://img.shields.io/badge/Vidhi_Patel-661818?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Vidhi003)

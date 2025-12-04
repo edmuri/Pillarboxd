@@ -89,7 +89,7 @@ end
 
 client = IGDBclient.new
 
-batches = 1
+batches = 2
 limit = 500
 offset = 0
 
